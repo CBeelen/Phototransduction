@@ -1,0 +1,553 @@
+********** MODEL NAME
+DM_noFB
+
+********** MODEL NOTES
+Update of the Invergo 2014 model  
+
+Charlotte's changes:
+
+- changed kG3 from 8500 to 250 to achieve fewer activated G and PDE
+- changed betasub from from 0.0021826 to 0.019 to achieve normal cGMP 
+- Rec as parameter not species, no Ca feedback   
+- new formulation of GC-GCAP system: changed rate v_r36, added variables regGC,
+changed alfamax, m and Kc                                                                
+                                                                                                                         
+                                                                                                                         
+REFERENCES:                                                                                                              
+-----------                                                                                                              
+- Dell'Orco et al. (2009). Network-level analysis of light adaptation in rod                                             
+  cells under normal and altered conditions. Mol. BioSyst. 5:1232-1246                                                   
+                                                                                                                         
+- Dell'Orco & Koch (2010). Quantitative detection of conformational transitions                                          
+  in a calcium sensor protein by surface plasmon resonance. Chem. Comm.                                                  
+  46(39):7316-7318.                                                                                                      
+                                                                                                                         
+- Felber et al. (1996): Stochastic Simulation of the Transducin GTPase Cycle,                                            
+  Biophys J, 1996, 71, 3051.                                                                                             
+                                                                                                                         
+- Firsov et al. (2005) Two realms of dark adaptation, Vision Res, 2005, 45, 147.                                         
+                                                                                                                         
+- Gibson et al. (2000) Phosphorylation modulates the affinity of light-activated                                         
+  rhodopsin for G protein and arrestin. Biochemistry, 39(19):5738-5749                                                   
+                                                                                                                         
+- Gross et al. (2012) Spatiotemporal cGMP dynamics in living mouse rods.                                                 
+  Biophysical Journal 102(8): 1775-1784                                                                                  
+                                                                                                                         
+- Gurevich et al. (2011) The functional cycle of visual arrestins in photoreceptor                                       
+  cells, Prog. Ret. Eye Research, 30(6) 405-430                                                                          
+                                                                                                                         
+- Hamer et al. (2005) Towards a unified model of vertebrate phototransduction,                                           
+  Visual Neurosci, 2005, 22, 417.                                                                                        
+                                                                                                                         
+- Hwang & Koch (2002) Calcium- and myristoyl-dependent properties of guanylate                                           
+  cyclase-activating protein-1 and protein-2. Biochemistry 41:13021-13028                                                
+                                                                                                                         
+- Kim et al (2011). Robust self-association is a common feature of mammalian                                             
+  visual arrestin-1. Biochemistry, 50(12):2235-2242                                                                      
+                                                                                                                         
+- Koch and Stryer (1988). Highly cooperative feedback control of retinal rod                                             
+  guanylate cyclase by calcium ions. Nature 334:64-66                                                                    
+                                                                                                                         
+- Leskov et al (2000). The gain of rod phototransduction: reconciliation of                                              
+  biochemical and electrophysiological measurements. Neuron 27(3):525-537                                                
+                                                                                                                         
+- Melia et al., (1997): A comparison of the efficiency of G protein activation by                                        
+  ligand-free and light-activated forms of rhodopsin, Biophys J, 1997, 73, 3182.                                         
+                                                                                                                         
+- Makino et al. (2008). A role for GCAP2 in regulating the photoresponse: guanylyl                                       
+  cyclase activation and rod electrophysiology in GUCA1B knock-out mice. J. Biol.                                        
+  Chem. 283(43):29135-29143                                                                                              
+                                                                                                                         
+- Muradov et al. (2006) Analysis of PDE6 function using chimeric PDE5/6 catalytic                                        
+  domains.                                                                                                               
+                                                                                                                         
+- Peshenko et al. (2006) Enzymatic properties and regulation of the native isozymes                                      
+  of retinal membrane guanylyl cyclase (RetGC) from mouse photoreceptors.                                                
+  Biochemistry 50: 5590-5600.                                                                                            
+                                                                                                                         
+- Pugh and Lamb (1993). Amplification and kineticcs of the activation steps in                                           
+  phototransduction. Biochimica et Biophysica Acta, 1141: 111-149                                                        
+                                                                                                                         
+- Pugh and Lamb (2000): Phototransduction in Vertebrate Rods and Cones:                                                  
+  Molecular Mechanisms of Amplification, Recovery and Light Adaptation, Elsevier                                         
+  Science B.V.: Amsterdam/New York, 2000, 3.                                                                             
+                                                                                                                         
+- Skiba et al (2000). The effector enzyme regulates the duration of G protein                                            
+  signaling in vertebrate photoreceptors by increasing the affinity between                                              
+  transducin and RGS protein. J. Biol. Chem. 42:32716-32720                                                              
+                                                                                                                         
+- Song et al. (2011) Arrestin-1 expression level in rods: balancing functional                                           
+  performance and photoreceptor health. Neuroscience, 174:37-49                                                          
+                                                                                                                         
+- Woodruff et al (2002) Measurement of cytoplasmic calcium concentration in the                                          
+  rods of wild-type and transducin knock-out mice. J. Physiol 542(3): 843-854                                            
+                                                                                                                         
+- Xu et al. (1997): Prolonged photoresponses in transgenic mouse rods lacking                                            
+  arrestin, Nature, 1997, 389, 505.
+
+********** MODEL STATE INFORMATION
+d/dt(Ca2_free) = -v_r33-v_r34+v_r35
+
+Arr(0) = 1.26076e+06 
+Arr_di(0) = 1.1233e+06 
+Arr_tetra(0) = 891810 
+Ca2_buff(0) = 19.2199 
+Ca2_free(0) = 0.25 
+Gt(0) = 8.1525e+06 
+PDE(0) = 2e+06 
+R(0) = 9.81525e7
+R_Gt(0) = 1.8475e6
+RGS(0) = 100000 
+RK(0) = 580 
+cGMP(0) = 6.4944 
+
+
+********** MODEL PARAMETERS
+Rtot = 1e+08  % (#)
+PDEtot = 2e+06  % (#)
+Gtot = 1e+07  % (#)
+RGStot = 100000  % (#)
+ArrTot = 7.0746e+06  % (#)
+flashBG = 0  % (#)
+flash0Dur = 0.001  % (s)
+flash0Mag = 0  % (#)
+flashDel = 0  % (s)
+flashDur = 0.001  % (s)
+flashMag = 0  % (#)
+otherstimulus = 0  % (#/s)
+kRK1_0 = 0.1724  % (1/s)
+omega = 2.5 
+kRK2 = 250  % (1/s)
+kRK3_ATP = 4000  % (1/s)
+kRK4 = 250  % (1/s)
+kArr = 9.9147e-06  % (1/s)
+kA2 = 0.026  % (1/s)
+m_Arr = 9.5475e-06 
+kA3 = 1.1651  % (1/s)
+kA4 = 2.9965e-07  % (1/s)
+kA5 = 0.424 
+kOps = 6.1172e-13  % (1/s)
+kRrecyc = 0.0007  % (1/s)
+omega_G = 0.6 
+kG1_0 = 0.001  % (1/s)
+kG2 = 2200  % (1/s)
+kG3 = 250  % (1/s)
+kG4_GDP = 400  % (1/s)
+kG5_GTP = 3500  % (1/s)
+kG6 = 8500  % (1/s)
+kG7 = 200  % (1/s)
+kGrecyc = 2  % (1/s)
+kGshutoff = 0.05  % (1/s)
+kP1 = 0.05497  % (1/s)
+kP1_rev = 0  % (1/s)
+kP2 = 940.7  % (1/s)
+kP3 = 1.4983e-09  % (1/s)
+kP4 = 21.088  % (1/s)
+kPDEshutoff = 0.1  % (1/s)
+kRGS1 = 4.8182e-05  % (1/s)
+kRGS2 = 98  % (1/s)
+kRec1 = 0.011  % (1/microM*s)
+kRec2 = 0.05  % (1/s)
+kRec3 = 0.00041081  % (1/s)
+kRec4 = 0.610084  % (1/s)
+Vcyto = 0.03916  % (pL)
+Kc1 = 0.171 % (uM)
+Kc1m = 0.171 % (uM)
+Kc2 = 0.059 % (uM)
+m1 = 3
+m1m = 3
+m2 = 1.5
+alfamax = 120 % modified to account for the different contributors 60 % (uM/s)
+f1 = 0.5 %fraction of the cGMP synthesis regulated by WT GCAP1
+f1m = 0 %fraction of the cGMP synthesis regulated by CORD-associated GCAP1
+f2 = 0.5 % fraction of the cGMP synthesis regulated by WT GCAP2
+betadark = 3.19  % (1/s)
+betasub = 0.019  % (1/s)
+fCa = 0.12  % ()
+Jdark = 14.87  % (pA)
+F = 96485.3  % (1/cm)
+cGMPdark = 6.4944  % (microM)
+ncg = 3.8  % ()
+gammaCa = 981.356  % (1/s)
+Ca2dark = 0.25  % (microM)
+Ca2_0 = 0.023  % (microM)
+k1 = 9.37059  % (1/microM*s)
+k2 = 46.412  % (1/s)
+eT = 400  % (microM)
+ktherm = 0.0238  % (1/s)
+
+RecR_Ca = 5.11e+05 
+RecR_Ca_RK = 199420 
+
+********** MODEL VARIABLES
+background = flashBG 
+premag = flash0Mag/flash0Dur 
+mag = flashMag/flashDur 
+predur = flash0Dur 
+dur = flashDur 
+del = flashDel 
+preflash = piecewiseIQM(premag,le(time,predur),0) 
+testflash = piecewiseIQM(mag,andIQM(ge(time,del),le(time,del+dur)),0) 
+stimulus = background+preflash+testflash+otherstimulus 
+numConcFactor = 1/(6.022e5*Vcyto) 
+kRK1_1 = kRK1_0*exp(-omega) 
+kRK1_2 = kRK1_0*exp(-omega*2) 
+kRK1_3 = kRK1_0*exp(-omega*3) 
+kRK1_4 = kRK1_0*exp(-omega*4) 
+kRK1_5 = kRK1_0*exp(-omega*5) 
+kRK1_6 = 0 
+kA1_1 = kArr 
+kA1_2 = kArr+1*m_Arr 
+kA1_3 = kArr+2*m_Arr 
+kA1_4 = kArr+3*m_Arr 
+kA1_5 = kArr+3*m_Arr 
+kA1_6 = kArr+3*m_Arr
+kGpre1 = kG1_0*1.6 
+kGpre2 = kG2*315  
+kG1_1 = kG1_0*exp(-omega_G) 
+kG1_2 = kG1_0*exp(-omega_G*2) 
+kG1_3 = kG1_0*exp(-omega_G*3) 
+kG1_4 = kG1_0*exp(-omega_G*4) 
+kG1_5 = kG1_0*exp(-omega_G*5) 
+kG1_6 = kG1_0*exp(-omega_G*6) 
+E = PDE_a_Ga_GTP+2*Ga_GTP_a_PDE_a_Ga_GTP+Ga_GTP_PDE_a_Ga_GTP 
+Ca2_frac = (Ca2_free-Ca2_0)/(Ca2dark-Ca2_0) 
+J = 2/(2+fCa)*power((cGMP/cGMPdark),ncg)*Jdark+fCa/(fCa+2)*Ca2_frac*Jdark  % (pA)
+deltaJ = Jdark-J  % (pA)
+regGC_GCAP1 = f1*alfamax/(1+power((Ca2_free/Kc1),m1))
+regGC_GCAP1m = f1m*alfamax/(1+power((Ca2_free/Kc1m),m1m))
+regGC_GCAP2 = f2*alfamax/(1+power((Ca2_free/Kc2),m2))
+regGC = regGC_GCAP1 + regGC_GCAP1m + regGC_GCAP2
+
+
+********** MODEL REACTIONS
+R => R0 : v_r1
+	vf = stimulus*R/Rtot
+
+R_Gt => R0_Gt : v_rstprec
+	vf = stimulus*R_Gt/Rtot
+
+R0+RK <=> R0_RKpre : v_r2_0
+	vf = kRK1_0*RK*R0
+	vr = (kRK2*R0_RKpre)
+
+R1+RK <=> R1_RKpre : v_r2_1
+	vf = kRK1_1*RK*R1
+	vr = (kRK2*R1_RKpre)
+
+R2+RK <=> R2_RKpre : v_r2_2
+	vf = kRK1_2*RK*R2
+	vr = (kRK2*R2_RKpre)
+
+R3+RK <=> R3_RKpre : v_r2_3
+	vf = kRK1_3*RK*R3
+	vr = (kRK2*R3_RKpre)
+
+R4+RK <=> R4_RKpre : v_r2_4
+	vf = kRK1_4*RK*R4
+	vr = (kRK2*R4_RKpre)
+
+R5+RK <=> R5_RKpre : v_r2_5
+	vf = kRK1_5*RK*R5
+	vr = (kRK2*R5_RKpre)
+
+R6+RK <=> R6_RKpre : v_r2_6
+	vf = kRK1_6*RK*R6
+	vr = (kRK2*R6_RKpre)
+
+R0_RKpre => R1_RKpost : v_r3_0
+	vf = kRK3_ATP*R0_RKpre
+
+R1_RKpre => R2_RKpost : v_r3_1
+	vf = kRK3_ATP*R1_RKpre
+
+R2_RKpre => R3_RKpost : v_r3_2
+	vf = kRK3_ATP*R2_RKpre
+
+R3_RKpre => R4_RKpost : v_r3_3
+	vf = kRK3_ATP*R3_RKpre
+
+R4_RKpre => R5_RKpost : v_r3_4
+	vf = kRK3_ATP*R4_RKpre
+
+R5_RKpre => R6_RKpost : v_r3_5
+	vf = kRK3_ATP*R5_RKpre
+
+R1_RKpost => R1+RK : v_r4_1
+	vf = kRK4*R1_RKpost
+
+R2_RKpost => R2+RK : v_r4_2
+	vf = kRK4*R2_RKpost
+
+R3_RKpost => R3+RK : v_r4_3
+	vf = kRK4*R3_RKpost
+
+R4_RKpost => R4+RK : v_r4_4
+	vf = kRK4*R4_RKpost
+
+R5_RKpost => R5+RK : v_r4_5
+	vf = kRK4*R5_RKpost
+
+R6_RKpost => R6+RK : v_r4_6
+	vf = kRK4*R6_RKpost
+
+Arr+R1 <=> R1_Arr : v_r5_1
+	vf = kA1_1*Arr*R1
+	vr = (kA2*R1_Arr)
+
+Arr+R2 <=> R2_Arr : v_r5_2
+	vf = kA1_2*Arr*R2
+	vr = (kA2*R2_Arr)
+
+Arr+R3 <=> R3_Arr : v_r5_3
+	vf = kA1_3*Arr*R3
+	vr = (kA2*R3_Arr)
+
+Arr+R4 <=> R4_Arr : v_r5_4
+	vf = kA1_4*Arr*R4
+	vr = (kA2*R4_Arr)
+
+Arr+R5 <=> R5_Arr : v_r5_5
+	vf = kA1_5*Arr*R5
+	vr = (kA2*R5_Arr)
+
+Arr+R6 <=> R6_Arr : v_r5_6
+	vf = kA1_6*Arr*R6
+	vr = (kA2*R6_Arr)
+
+R1_Arr => Arr+Ops : v_r6_1
+	vf = kA3*R1_Arr
+
+R2_Arr => Arr+Ops : v_r6_2
+	vf = kA3*R2_Arr
+
+R3_Arr => Arr+Ops : v_r6_3
+	vf = kA3*R3_Arr
+
+R4_Arr => Arr+Ops : v_r6_4
+	vf = kA3*R4_Arr
+
+R5_Arr => Arr+Ops : v_r6_5
+	vf = kA3*R5_Arr
+
+R6_Arr => Arr+Ops : v_r6_6
+	vf = kA3*R6_Arr
+
+R0 => Ops : v_r7_0
+	vf = ktherm*R0
+
+R1 => Ops : v_r7_1
+	vf = ktherm*R1
+
+R2 => Ops : v_r7_2
+	vf = ktherm*R2
+
+R3 => Ops : v_r7_3
+	vf = ktherm*R3
+
+R4 => Ops : v_r7_4
+	vf = ktherm*R4
+
+R5 => Ops : v_r7_5
+	vf = ktherm*R5
+
+R6 => Ops : v_r7_6
+	vf = ktherm*R6
+
+Gt+Ops <=> Ops_Gt : v_r8
+	vf = kOps*Ops*Gt
+	vr = (kG2*Ops_Gt)
+
+Ops_Gt <=> Ops_G : v_r9
+	vf = kG3*Ops_Gt
+	vr = (kG4_GDP*Ops_G)
+
+Ops_G => Ops_G_GTP : v_r10
+	vf = kG5_GTP*Ops_G
+
+Ops_G_GTP => G_GTP+Ops : v_r11
+	vf = kG6*Ops_G_GTP
+
+Ops => R : v_r12
+	vf = kRrecyc*Ops
+
+Gt+R <=> R_Gt : v_GtRpre
+	vf = kGpre1*Gt*R
+	vr = (kGpre2*R_Gt)
+
+Gt+R0 <=> R0_Gt : v_r13_0
+	vf = kG1_0*Gt*R0
+	vr = (kG2*R0_Gt)
+
+Gt+R1 <=> R1_Gt : v_r13_1
+	vf = kG1_1*Gt*R1
+	vr = (kG2*R1_Gt)
+
+Gt+R2 <=> R2_Gt : v_r13_2
+	vf = kG1_2*Gt*R2
+	vr = (kG2*R2_Gt)
+
+Gt+R3 <=> R3_Gt : v_r13_3
+	vf = kG1_3*Gt*R3
+	vr = (kG2*R3_Gt)
+
+Gt+R4 <=> R4_Gt : v_r13_4
+	vf = kG1_4*Gt*R4
+	vr = (kG2*R4_Gt)
+
+Gt+R5 <=> R5_Gt : v_r13_5
+	vf = kG1_5*Gt*R5
+	vr = (kG2*R5_Gt)
+
+Gt+R6 <=> R6_Gt : v_r13_6
+	vf = kG1_6*Gt*R6
+	vr = (kG2*R6_Gt)
+
+R0_Gt <=> R0_G : v_r14_0
+	vf = kG3*R0_Gt
+	vr = (kG4_GDP*R0_G)
+
+R1_Gt <=> R1_G : v_r14_1
+	vf = kG3*R1_Gt
+	vr = (kG4_GDP*R1_G)
+
+R2_Gt <=> R2_G : v_r14_2
+	vf = kG3*R2_Gt
+	vr = (kG4_GDP*R2_G)
+
+R3_Gt <=> R3_G : v_r14_3
+	vf = kG3*R3_Gt
+	vr = (kG4_GDP*R3_G)
+
+R4_Gt <=> R4_G : v_r14_4
+	vf = kG3*R4_Gt
+	vr = (kG4_GDP*R4_G)
+
+R5_Gt <=> R5_G : v_r14_5
+	vf = kG3*R5_Gt
+	vr = (kG4_GDP*R5_G)
+
+R6_Gt <=> R6_G : v_r14_6
+	vf = kG3*R6_Gt
+	vr = (kG4_GDP*R6_G)
+
+R0_G => R0_G_GTP : v_r15_0
+	vf = kG5_GTP*R0_G
+
+R1_G => R1_G_GTP : v_r15_1
+	vf = kG5_GTP*R1_G
+
+R2_G => R2_G_GTP : v_r15_2
+	vf = kG5_GTP*R2_G
+
+R3_G => R3_G_GTP : v_r15_3
+	vf = kG5_GTP*R3_G
+
+R4_G => R4_G_GTP : v_r15_4
+	vf = kG5_GTP*R4_G
+
+R5_G => R5_G_GTP : v_r15_5
+	vf = kG5_GTP*R5_G
+
+R6_G => R6_G_GTP : v_r15_6
+	vf = kG5_GTP*R6_G
+
+R0_G_GTP => G_GTP+R0 : v_r16_0
+	vf = kG6*R0_G_GTP
+
+R1_G_GTP => G_GTP+R1 : v_r16_1
+	vf = kG6*R1_G_GTP
+
+R2_G_GTP => G_GTP+R2 : v_r16_2
+	vf = kG6*R2_G_GTP
+
+R3_G_GTP => G_GTP+R3 : v_r16_3
+	vf = kG6*R3_G_GTP
+
+R4_G_GTP => G_GTP+R4 : v_r16_4
+	vf = kG6*R4_G_GTP
+
+R5_G_GTP => G_GTP+R5 : v_r16_5
+	vf = kG6*R5_G_GTP
+
+R6_G_GTP => G_GTP+R6 : v_r16_6
+	vf = kG6*R6_G_GTP
+
+G_GTP => Ga_GTP+Gbg : v_r17
+	vf = kG7*G_GTP
+
+Ga_GTP+PDE <=> PDE_Ga_GTP : v_r18
+	vf = kP1*PDE*Ga_GTP
+	vr = (kP1_rev*PDE_Ga_GTP)
+
+PDE_Ga_GTP => PDE_a_Ga_GTP : v_r19
+	vf = kP2*PDE_Ga_GTP
+
+Ga_GTP+PDE_a_Ga_GTP => Ga_GTP_PDE_a_Ga_GTP : v_r20
+	vf = kP3*PDE_a_Ga_GTP*Ga_GTP
+
+Ga_GTP_PDE_a_Ga_GTP => Ga_GTP_a_PDE_a_Ga_GTP : v_r21
+	vf = kP4*Ga_GTP_PDE_a_Ga_GTP
+
+Ga_GTP_a_PDE_a_Ga_GTP+RGS => RGS_Ga_GTP_a_PDE_a_Ga_GTP : v_r22
+	vf = kRGS1*RGS*Ga_GTP_a_PDE_a_Ga_GTP
+
+RGS_Ga_GTP_a_PDE_a_Ga_GTP => Ga_GDP+PDE_a_Ga_GTP+RGS : v_r23
+	vf = kRGS2*RGS_Ga_GTP_a_PDE_a_Ga_GTP
+
+PDE_a_Ga_GTP+RGS => RGS_PDE_a_Ga_GTP : v_r24
+	vf = kRGS1*RGS*PDE_a_Ga_GTP
+
+RGS_PDE_a_Ga_GTP => Ga_GDP+PDE+RGS : v_r25
+	vf = kRGS2*RGS_PDE_a_Ga_GTP
+
+PDE_a_Ga_GTP => Ga_GDP+PDE : v_r26
+	vf = kPDEshutoff*PDE_a_Ga_GTP
+
+Ga_GTP_a_PDE_a_Ga_GTP => Ga_GDP+PDE_a_Ga_GTP : v_r27
+	vf = kPDEshutoff*Ga_GTP_a_PDE_a_Ga_GTP
+
+Ga_GTP => Ga_GDP : v_r28
+	vf = kGshutoff*Ga_GTP
+
+Ga_GDP+Gbg => Gt : v_r29
+	vf = kGrecyc*Gbg*Ga_GDP
+
+RK <=> : v_r31
+	vf = kRec3*RecR_Ca*RK
+	vr = (kRec4*RecR_Ca_RK)
+
+2*Arr <=> Arr_di : v_r_diarr
+	vf = kA4*Arr*Arr
+	vr = (kA5*Arr_di)
+
+2*Arr_di <=> Arr_tetra : v_r_tetraarr
+	vf = kA4*Arr_di*Arr_di
+	vr = (kA5*Arr_tetra)
+
+ <=> Ca2_buff : v_r33
+	vf = k1*(eT-Ca2_buff)*Ca2_free
+	vr = (k2*Ca2_buff)
+
+ =>  : v_r34
+	vf = gammaCa*(Ca2_free-Ca2_0)
+
+ =>  : v_r35
+	vf = 1e6*fCa*Jdark/((2+fCa)*F*Vcyto)*power((cGMP/cGMPdark),ncg)
+
+ => cGMP : v_r36
+	vf = regGC
+
+cGMP =>  : v_r37
+	vf = (betadark+betasub*E)*cGMP
+
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

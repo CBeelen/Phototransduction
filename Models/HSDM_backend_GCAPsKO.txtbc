@@ -1,0 +1,156 @@
+********** MODEL NAME
+HSDM backend, GCAPs KO
+
+********** MODEL NOTES
+Update of the Invergo 2014 model
+Backend for stochastic simulations
+
+Charlotte's changes (old):
+- deleted all species from frontend: only Ca_buffer, Ca_free and cGMP remain
+- Recoverin is deleted as species   
+
+- changed betasub from 0.0021826 to 0.01  
+- k1 returned to normal value 9.37059  
+
+- GCAPs KO                                                  
+                                                                                                                         
+                                                                                                                         
+REFERENCES:                                                                                                              
+-----------                                                                                                              
+- Dell'Orco et al. (2009). Network-level analysis of light adaptation in rod                                             
+  cells under normal and altered conditions. Mol. BioSyst. 5:1232-1246                                                   
+                                                                                                                         
+- Dell'Orco & Koch (2010). Quantitative detection of conformational transitions                                          
+  in a calcium sensor protein by surface plasmon resonance. Chem. Comm.                                                  
+  46(39):7316-7318.                                                                                                      
+                                                                                                                         
+- Felber et al. (1996): Stochastic Simulation of the Transducin GTPase Cycle,                                            
+  Biophys J, 1996, 71, 3051.                                                                                             
+                                                                                                                         
+- Firsov et al. (2005) Two realms of dark adaptation, Vision Res, 2005, 45, 147.                                         
+                                                                                                                         
+- Gibson et al. (2000) Phosphorylation modulates the affinity of light-activated                                         
+  rhodopsin for G protein and arrestin. Biochemistry, 39(19):5738-5749                                                   
+                                                                                                                         
+- Gross et al. (2012) Spatiotemporal cGMP dynamics in living mouse rods.                                                 
+  Biophysical Journal 102(8): 1775-1784                                                                                  
+                                                                                                                         
+- Gurevich et al. (2011) The functional cycle of visual arrestins in photoreceptor                                       
+  cells, Prog. Ret. Eye Research, 30(6) 405-430                                                                          
+                                                                                                                         
+- Hamer et al. (2005) Towards a unified model of vertebrate phototransduction,                                           
+  Visual Neurosci, 2005, 22, 417.                                                                                        
+                                                                                                                         
+- Hwang & Koch (2002) Calcium- and myristoyl-dependent properties of guanylate                                           
+  cyclase-activating protein-1 and protein-2. Biochemistry 41:13021-13028                                                
+                                                                                                                         
+- Kim et al (2011). Robust self-association is a common feature of mammalian                                             
+  visual arrestin-1. Biochemistry, 50(12):2235-2242                                                                      
+                                                                                                                         
+- Koch and Stryer (1988). Highly cooperative feedback control of retinal rod                                             
+  guanylate cyclase by calcium ions. Nature 334:64-66                                                                    
+                                                                                                                         
+- Leskov et al (2000). The gain of rod phototransduction: reconciliation of                                              
+  biochemical and electrophysiological measurements. Neuron 27(3):525-537                                                
+                                                                                                                         
+- Melia et al., (1997): A comparison of the efficiency of G protein activation by                                        
+  ligand-free and light-activated forms of rhodopsin, Biophys J, 1997, 73, 3182.                                         
+                                                                                                                         
+- Makino et al. (2008). A role for GCAP2 in regulating the photoresponse: guanylyl                                       
+  cyclase activation and rod electrophysiology in GUCA1B knock-out mice. J. Biol.                                        
+  Chem. 283(43):29135-29143                                                                                              
+                                                                                                                         
+- Muradov et al. (2006) Analysis of PDE6 function using chimeric PDE5/6 catalytic                                        
+  domains.                                                                                                               
+                                                                                                                         
+- Peshenko et al. (2006) Enzymatic properties and regulation of the native isozymes                                      
+  of retinal membrane guanylyl cyclase (RetGC) from mouse photoreceptors.                                                
+  Biochemistry 50: 5590-5600.                                                                                            
+                                                                                                                         
+- Pugh and Lamb (1993). Amplification and kineticcs of the activation steps in                                           
+  phototransduction. Biochimica et Biophysica Acta, 1141: 111-149                                                        
+                                                                                                                         
+- Pugh and Lamb (2000): Phototransduction in Vertebrate Rods and Cones:                                                  
+  Molecular Mechanisms of Amplification, Recovery and Light Adaptation, Elsevier                                         
+  Science B.V.: Amsterdam/New York, 2000, 3.                                                                             
+                                                                                                                         
+- Skiba et al (2000). The effector enzyme regulates the duration of G protein                                            
+  signaling in vertebrate photoreceptors by increasing the affinity between                                              
+  transducin and RGS protein. J. Biol. Chem. 42:32716-32720                                                              
+                                                                                                                         
+- Song et al. (2011) Arrestin-1 expression level in rods: balancing functional                                           
+  performance and photoreceptor health. Neuroscience, 174:37-49                                                          
+                                                                                                                         
+- Woodruff et al (2002) Measurement of cytoplasmic calcium concentration in the                                          
+  rods of wild-type and transducin knock-out mice. J. Physiol 542(3): 843-854                                            
+                                                                                                                         
+- Xu et al. (1997): Prolonged photoresponses in transgenic mouse rods lacking                                            
+  arrestin, Nature, 1997, 389, 505.
+
+********** MODEL STATE INFORMATION
+d/dt(Ca2_free) = -v_r33-v_r34+v_r35
+
+Ca2_buff(0) = 19.2199 
+Ca2_free(0) = 0.25 
+cGMP(0) = 6.4944 
+
+
+********** MODEL PARAMETERS
+Vcyto = 0.03916  % (pL)
+Kc1 = 0.171  % (uM)
+Kc2 = 0.059  % (uM)
+m1 = 3 
+m2 = 1.5 
+alfamax = 60  % (uM/s)
+betadark = 3.19  % (1/s)
+betasub = 0.01  % (1/s)
+fCa = 0.12  % ()
+Jdark = 14.87  % (pA)
+F = 96485.3  % (1/cm)
+cGMPdark = 6.4944  % (microM)
+ncg = 3.8  % ()
+gammaCa = 981.356  % (1/s)
+Ca2dark = 0.25  % (microM)
+Ca2_0 = 0.023  % (microM)
+k1 = 9.37059  % (1/microM*s)
+k2 = 46.412  % (1/s)
+eT = 400  % (microM)
+
+
+********** MODEL VARIABLES
+E = 1
+
+numConcFactor = 1/(6.022e5*Vcyto) 
+Ca2_frac = (Ca2_free-Ca2_0)/(Ca2dark-Ca2_0) 
+J = 2/(2+fCa)*power((cGMP/cGMPdark),ncg)*Jdark+fCa/(fCa+2)*Ca2_frac*Jdark  % (pA)
+deltaJ = Jdark-J  % (pA)
+
+
+********** MODEL REACTIONS
+
+ <=> Ca2_buff : v_r33
+	vf = k1*(eT-Ca2_buff)*Ca2_free
+	vr = (k2*Ca2_buff)
+
+ =>  : v_r34
+	vf = gammaCa*(Ca2_free-Ca2_0)
+
+ =>  : v_r35
+	vf = 1e6*fCa*Jdark/((2+fCa)*F*Vcyto)*power((cGMP/cGMPdark),ncg)
+
+ => cGMP : v_r36
+	vf = alfamax/(1+power((Ca2dark/Kc1),m1))+alfamax/(1+power((Ca2dark/Kc2),m2))
+
+cGMP =>  : v_r37
+	vf = (betadark+betasub*E)*cGMP
+
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

@@ -1,0 +1,239 @@
+********** MODEL NAME
+Beelen_small_2PDE_7_stoch
+
+********** MODEL NOTES
+Small version of the 2-PDE activation model
+This is just the frontend!
+All molecule numbers: 1/580
+One disk would be 1/810
+Rate constants are adapted according to the change in molecule #
+kG3 and kP4 changed
+kG1_0, kG2, kG5_GTP, kG6 and kRGS1 changed similar to param estimation
+kP1_rev, kP3_rev nonzero and changed as well as kP1 and kP3
+changed the R+Gt precoupling reaction rate
+Backend: betasub changed from 0.002 to 0.01
+Retuning of kRK1_0, kRGS1 and kRGS2 to improve results for the mutants
+k1 returned to normal value 9.37059
+
+********** MODEL STATE INFORMATION
+Arr(0) = 2174
+Gt(0) = 14056
+PDE(0) = 3448
+R(0) = 169228
+RGS(0) = 172
+RK(0) = 1  
+R_Gt(0) = 3185
+R0(0) = 1
+R0_Gt(0) = 0                        
+ 
+********** MODEL PARAMETERS
+Rtot = 172413  % (#)
+PDEtot = 3448  % (#)
+Gtot = 17241  % (#)
+RGStot = 172  % (#)
+kRK1_0 = 18  % (1/s)
+omega = 2.5 
+kRK2 = 250  % (1/s)
+kRK3_ATP = 4000  % (1/s)
+kRK4 = 250  % (1/s)
+kArr = 5.751e-03  % (1/s)
+kA2 = 0.026  % (1/s)
+m_Arr = 5.538e-03 
+kA3 = 1.1651  % (1/s)
+omega_G = 0.6 
+kG1_0 = 1.5  % (1/s)
+kG2 = 2600  % (1/s)
+kG3 = 85000  % (1/s)
+kG4_GDP = 400  % (1/s)
+kG5_GTP = 12000  % (1/s)
+kG6 = 85000  % (1/s)
+kG7 = 200  % (1/s)
+kGrecyc = 2  % (1/s)
+kGshutoff = 0.05  % (1/s)
+kP1 = 31.8826  % (1/s)
+kP1_rev = 100  % (1/s)
+kP2 = 940.7  % (1/s)
+kP4 = 940.7  % (1/s)
+kPDEshutoff = 0.1  % (1/s)
+kRGS1 = 0.06  % (1/s)
+kRGS2 = 140  % (1/s)
+Vcyto = 6.7517e-05  % (pL)
+% former variables
+kRK1_1 = 1.4775
+kRK1_2 = 0.1213 
+kA1_1 = 5.751e-03
+kA1_2 = 11.289e-03 
+kA1_3 = 16.827e-03 
+kG1_1 = 0.8232 
+kG1_2 = 0.4518 
+kG1_3 = 0.2479 
+kGpre1 = 538.24
+kGpre2 = 4.019e+08
+kP3 = 31.8826
+kP3_rev = 3000
+
+********** MODEL VARIABLES
+
+
+
+********** MODEL REACTIONS
+R0+RK <=> R0_RKpre : v_r2_0
+	vf = kRK1_0*RK*R0
+	vr = (kRK2*R0_RKpre)
+
+R1+RK <=> R1_RKpre : v_r2_1
+	vf = kRK1_1*RK*R1
+	vr = (kRK2*R1_RKpre)
+
+R2+RK <=> R2_RKpre : v_r2_2
+	vf = kRK1_2*RK*R2
+	vr = (kRK2*R2_RKpre)
+
+R0_RKpre => R1_RKpost : v_r3_0
+	vf = kRK3_ATP*R0_RKpre
+
+R1_RKpre => R2_RKpost : v_r3_1
+	vf = kRK3_ATP*R1_RKpre
+
+R2_RKpre => R3_RKpost : v_r3_2
+	vf = kRK3_ATP*R2_RKpre
+
+R1_RKpost => R1+RK : v_r4_1
+	vf = kRK4*R1_RKpost
+
+R2_RKpost => R2+RK : v_r4_2
+	vf = kRK4*R2_RKpost
+
+R3_RKpost => R3+RK : v_r4_3
+	vf = kRK4*R3_RKpost
+
+Arr+R1 <=> R1_Arr : v_r5_1
+	vf = kA1_1*Arr*R1
+	vr = (kA2*R1_Arr)
+
+Arr+R2 <=> R2_Arr : v_r5_2
+	vf = kA1_2*Arr*R2
+	vr = (kA2*R2_Arr)
+
+Arr+R3 <=> R3_Arr : v_r5_3
+	vf = kA1_3*Arr*R3
+	vr = (kA2*R3_Arr)
+
+R1_Arr => Arr : v_r6_1
+	vf = kA3*R1_Arr
+
+R2_Arr => Arr : v_r6_2
+	vf = kA3*R2_Arr
+
+R3_Arr => Arr : v_r6_3
+	vf = kA3*R3_Arr
+
+R_Gt => Gt+R : v_GtRpre
+	vf = kGpre2*R_Gt - kGpre1*Gt*R
+
+Gt+R0 <=> R0_Gt : v_r13_0
+	vf = kG1_0*Gt*R0
+	vr = (kG2*R0_Gt)
+
+Gt+R1 <=> R1_Gt : v_r13_1
+	vf = kG1_1*Gt*R1
+	vr = (kG2*R1_Gt)
+
+Gt+R2 <=> R2_Gt : v_r13_2
+	vf = kG1_2*Gt*R2
+	vr = (kG2*R2_Gt)
+
+Gt+R3 <=> R3_Gt : v_r13_3
+	vf = kG1_3*Gt*R3
+	vr = (kG2*R3_Gt)
+
+R0_Gt <=> R0_G : v_r14_0
+	vf = kG3*R0_Gt
+	vr = (kG4_GDP*R0_G)
+
+R1_Gt <=> R1_G : v_r14_1
+	vf = kG3*R1_Gt
+	vr = (kG4_GDP*R1_G)
+
+R2_Gt <=> R2_G : v_r14_2
+	vf = kG3*R2_Gt
+	vr = (kG4_GDP*R2_G)
+
+R3_Gt <=> R3_G : v_r14_3
+	vf = kG3*R3_Gt
+	vr = (kG4_GDP*R3_G)
+
+R0_G => R0_G_GTP : v_r15_0
+	vf = kG5_GTP*R0_G
+
+R1_G => R1_G_GTP : v_r15_1
+	vf = kG5_GTP*R1_G
+
+R2_G => R2_G_GTP : v_r15_2
+	vf = kG5_GTP*R2_G
+
+R3_G => R3_G_GTP : v_r15_3
+	vf = kG5_GTP*R3_G
+
+R0_G_GTP => G_GTP+R0 : v_r16_0
+	vf = kG6*R0_G_GTP
+
+R1_G_GTP => G_GTP+R1 : v_r16_1
+	vf = kG6*R1_G_GTP
+
+R2_G_GTP => G_GTP+R2 : v_r16_2
+	vf = kG6*R2_G_GTP
+
+R3_G_GTP => G_GTP+R3 : v_r16_3
+	vf = kG6*R3_G_GTP
+
+G_GTP => Ga_GTP+Gbg : v_r17
+	vf = kG7*G_GTP
+
+Ga_GTP+PDE <=> PDE_Ga_GTP : v_r18
+	vf = kP1*PDE*Ga_GTP
+	vr = (kP1_rev*PDE_Ga_GTP)
+
+PDE_Ga_GTP => PDE_a_Ga_GTP : v_r19
+	vf = kP2*PDE_Ga_GTP
+
+Ga_GTP+PDE_a_Ga_GTP <=> Ga_GTP_PDE_a_Ga_GTP : v_r20
+	vf = kP3*PDE_a_Ga_GTP*Ga_GTP
+	vr = (kP3_rev*Ga_GTP_PDE_a_Ga_GTP)
+
+Ga_GTP_PDE_a_Ga_GTP => Ga_GTP_a_PDE_a_Ga_GTP : v_r21
+	vf = kP4*Ga_GTP_PDE_a_Ga_GTP
+
+Ga_GTP_a_PDE_a_Ga_GTP+RGS => RGS_Ga_GTP_a_PDE_a_Ga_GTP : v_r22
+	vf = kRGS1*RGS*Ga_GTP_a_PDE_a_Ga_GTP
+
+RGS_Ga_GTP_a_PDE_a_Ga_GTP => Ga_GDP+PDE_a_Ga_GTP+RGS : v_r23
+	vf = kRGS2*RGS_Ga_GTP_a_PDE_a_Ga_GTP
+
+PDE_a_Ga_GTP+RGS => RGS_PDE_a_Ga_GTP : v_r24
+	vf = kRGS1*RGS*PDE_a_Ga_GTP
+
+RGS_PDE_a_Ga_GTP => Ga_GDP+PDE+RGS : v_r25
+	vf = kRGS2*RGS_PDE_a_Ga_GTP
+
+PDE_a_Ga_GTP => Ga_GDP+PDE : v_r26
+	vf = kPDEshutoff*PDE_a_Ga_GTP
+
+Ga_GTP_a_PDE_a_Ga_GTP => Ga_GDP+PDE_a_Ga_GTP : v_r27
+	vf = kPDEshutoff*Ga_GTP_a_PDE_a_Ga_GTP
+
+Ga_GTP => Ga_GDP : v_r28
+	vf = kGshutoff*Ga_GTP
+
+Ga_GDP+Gbg => Gt : v_r29
+	vf = kGrecyc*Gbg*Ga_GDP
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+
+      
