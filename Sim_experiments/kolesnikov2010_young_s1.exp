@@ -1,0 +1,21 @@
+********** EXPERIMENT NAME
+
+Koleskinov et al 2010 3 m.o. 1st stimulus, 1.7 photons um^-2, 
+0.43um^-2 collecting area from Krispel et al (2006) Neuron
+
+********** EXPERIMENT NOTES
+
+WT adult mouse single-cell electrophysiology
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+flashDel = 0.03
+flashDur = 0.02
+flashMag = 0.731
+
+********** EXPERIMENT PARAMETER CHANGES
+
+
+********** EXPERIMENT STATE CHANGES
+
+

@@ -1,0 +1,22 @@
+********** EXPERIMENT NAME
+
+Light_adaptation_experiment_with_background_and_flash
+
+********** EXPERIMENT NOTES
+
+Light background stimulus with flash at 0 sec.
+9.50 photons/um^2
+0.43um^-2 collecting area (Krispel et al (2006) Neuron)
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+flashBG = 0
+flashMag = 9.5
+flashDur = 0.001
+flashDel = 0
+
+********** EXPERIMENT PARAMETER CHANGES
+
+
+********** EXPERIMENT STATE CHANGES
+

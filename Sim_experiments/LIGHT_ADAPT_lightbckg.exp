@@ -1,0 +1,22 @@
+********** EXPERIMENT NAME
+
+Light_adaptation_experiment_with_background_only
+
+********** EXPERIMENT NOTES
+
+No flash, just a light background stimulus.
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+% No flash
+flashBG = 35
+flash0Mag = 0
+flashMag = 0 
+
+********** EXPERIMENT PARAMETER CHANGES
+
+
+********** EXPERIMENT STATE CHANGES
+
+
+

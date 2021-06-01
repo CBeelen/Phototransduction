@@ -1,0 +1,18 @@
+********** EXPERIMENT NAME
+
+Light_step_and_flash
+
+********** EXPERIMENT NOTES
+
+Step of background light with flash of brighter light at 10s as per
+Makino et al 2004
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+flash0Dur = 10
+flash0Mag = 800
+flashMag = 3000
+flashDur = 0.01
+flashDel = 10
+
+********** EXPERIMENT PARAMETER CHANGES

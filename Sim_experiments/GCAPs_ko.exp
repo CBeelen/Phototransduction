@@ -1,0 +1,22 @@
+********** EXPERIMENT NAME
+
+GCAPs_knockout
+
+********** EXPERIMENT NOTES
+
+GCAPs-/-  insilico experiment description for the 
+Phototransd_Lightadapt_Model_2009 model.
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+% GCAPs knock-out realized by setting m=0
+m1 = 0
+m2 = 0
+alfamax = 20.735
+
+********** EXPERIMENT PARAMETER CHANGES
+
+
+********** EXPERIMENT STATE CHANGES
+
+

@@ -1,0 +1,24 @@
+********** EXPERIMENT NAME
+
+Light_adaptation_experiment_with_flash
+
+********** EXPERIMENT NOTES
+
+No background stimulus, only a flash at time=40sec.
+1590 photons/um^2 per Burns et al 2002 Neuron
+0.43um^-2 collecting area (Krispel et al (2006) Neuron)
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+
+% No flash (flash realized in a different way, see below)
+flashBG = 0  
+flash0Mag = 0
+flashMag = 683.7
+flashDur = 0.01
+flashDel = 100
+otherstimulus = 0
+
+********** EXPERIMENT PARAMETER CHANGES
+
+
+********** EXPERIMENT STATE CHANGES
