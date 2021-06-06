@@ -1,5 +1,5 @@
 %% Random initial conditions
-
+clear all; close all;
 % load data:
 load('Simulation_data/Fig6data.mat');
 
@@ -302,8 +302,8 @@ for i=1:numfail
     p1 = plot(time_new, failures(:,i), 'k');
 end
 p2 = plot(time_new, av_fail, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 xlim([0 2]);
 ylim([-0.5 3.5]);
 title('Categorized failures');
@@ -318,8 +318,8 @@ for i=1:numSPR
     p1 = plot(time_new, SPRS(:,i), 'k');
 end
 p2 = plot(time_new, av_SPR, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 xlim([0 2]);
 ylim([-0.5 3.5]);
 title('Categorized SPRs');
@@ -333,8 +333,8 @@ for i=1:numlarger
     p1 = plot(time_new, multiples(:,i), 'k');
 end
 p2 = plot(time_new, av_larger, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 xlim([0 2]);
 ylim([-0.5 3.5]);
 title('Categorized MPRs');
@@ -364,8 +364,8 @@ end
 xlim([0 2]);
 ylim([-0.5 3.5]);
 title('Miscategorized true SPRs');
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 set(gca, 'FontSize', 10);
 
 subplot(1,2,2)
@@ -378,8 +378,8 @@ end
 xlim([0 2]);
 ylim([-0.5 3.5]);
 title('Miscategorized true MPRs');
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 set(gca, 'FontSize', 10);
 
 
@@ -392,3 +392,9 @@ vararea0 = var(area0);
 
 %% calculate CV of area and amplitude
 [CVarea, CVamplitude] = CV(timestep, SPRS(1:1533,:), varamp0, vararea0)
+
+%% calculate TTP of true SPRs and MPRs
+[maxSPR, indexSPR] = max(av_trueSPR);
+TTP_SPR = time_new(indexSPR)
+[maxMPR, indexMPR] = max(av_truemult);
+TTP_MPR = time_new(indexMPR)

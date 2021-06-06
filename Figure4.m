@@ -444,8 +444,8 @@ for i=1:numfail
     p1 = plot(s1{1,1}-0.5326, ReCurrentfail(:,i), 'k');
 end
 p2 = plot(s1{1,1}-0.5326, avfail, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('Scaled {\Delta}J');
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 set(gca,'Fontsize',15);
 legend([p1 p2], {'All traces', 'Average'});
 title('Failures');
@@ -460,8 +460,8 @@ for i=1:numSPR
     p1 = plot(s1{1,1}-0.5326, ReCurrentSPR(:,i), 'k');
 end
 p2 = plot(s1{1,1}-0.5326, avSPR, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('Scaled {\Delta}J');
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 set(gca,'Fontsize',15);
 %legend([p1 p2], {'SPR traces', 'average SPR trace'});
 title('SPRs');
@@ -478,8 +478,8 @@ for i=1:numlarger
     end
 end
 p2 = plot(s1{1,1}-0.5326, avmult, 'r', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('Scaled {\Delta}J');
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 title('MPRs');
 set(gca,'Fontsize',15);
 %legend([p1 p2], {'MPR traces', 'average MPR trace'});

@@ -65,8 +65,8 @@ end
 p2 = plot(time_new, av_PDE_doub, 'r', 'LineWidth', 1.5);
 xlim([0 2]);
 ylim([0 60]);
-xlabel('time/s');
-ylabel('#PDE **');
+xlabel('time (s)');
+ylabel('#PDE**');
 title('Double activated PDE');
 legend([p1 p2], 'Stochastic', 'Average');
 set(gca, 'FontSize', 12);
@@ -81,8 +81,8 @@ end
 p2 = plot(time_new, av_PDE_sing, 'r', 'LineWidth', 1.5);
 xlim([0 2]);
 ylim([0 800]);
-xlabel('time/s');
-ylabel('#PDE *');
+xlabel('time (s)');
+ylabel('#PDE*');
 legend([p1 p2], 'Stochastic', 'Average');
 title('Single activated PDE');
 set(gca, 'FontSize', 12);
@@ -97,8 +97,8 @@ end
 p2 = plot(time_new, av_PDE_sing +2* av_PDE_doub, 'r', 'LineWidth', 1.5);
 xlim([0 2]);
 ylim([0 900]);
-xlabel('time/s');
-ylabel('#G *');
+xlabel('time (s)');
+ylabel('#G*');
 legend([p1 p2], 'Stochastic', 'Average');
 title('Activated Transducin');
 set(gca, 'FontSize', 12);
@@ -178,8 +178,8 @@ legend([p1 p2 p3 p4], 'Stochastic', 'Average', 'Deterministic', 'Electrophysiolo
 set(gca,'Fontsize',12);
 xlim([0 1.5]);
 ylim([-0.1 1.7]);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 
 subplot(1,2,2);
 hold on;
@@ -192,7 +192,7 @@ end
 p2 = plot(time_new, av_effector, 'r', 'LineWidth', 1.5);
 xlim([0 2]);
 ylim([0 70]);
-xlabel('time/s');
+xlabel('time (s)');
 ylabel('#E');
 set(gca,'Fontsize',12);
 legend([p1 p2], 'Stochastic', 'Average');

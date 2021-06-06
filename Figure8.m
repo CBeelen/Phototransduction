@@ -108,7 +108,7 @@ load('Data_references/GCAPs.mat');
 load('Data_references/WT_GCAPs.mat');
 
 %% PUBLICATION FIGURE 3
-figure(4);
+figure(4); clf;
 subplot(1,2,1);
 hold on;
 pbaspect([1 1 1]);
@@ -120,30 +120,30 @@ plot(CSM(:,1), CSM(:,2)/max(WT_CSM(:,2)), 'g', 'LineWidth', 1);
 plot(GCAPs(:,1), GCAPs(:,2)/max(WT_GCAPs(:,2)), 'Color', ...
     [0.9290, 0.6940, 0.1250], 'LineWidth', 1);
 % wild types
-plot(WT_Arr(:,1), WT_Arr(:,2)/max(WT_Arr(:,2)), 'r', 'LineWidth', 0.5);
-plot(WT_RK(:,1), WT_RK(:,2)/max(WT_RK(:,2)), 'b', 'LineWidth', 0.5);
-plot(WT_CSM(:,1), WT_CSM(:,2)/max(WT_CSM(:,2)), 'g', 'LineWidth', 0.5);
-plot(WT_GCAPs(:,1), WT_GCAPs(:,2)/max(WT_GCAPs(:,2)), 'Color', ...
+plot(WT_Arr(:,1), WT_Arr(:,2)/max(WT_Arr(:,2)), 'r.', 'LineWidth', 0.5);
+plot(WT_RK(:,1), WT_RK(:,2)/max(WT_RK(:,2)), 'b.', 'LineWidth', 0.5);
+plot(WT_CSM(:,1), WT_CSM(:,2)/max(WT_CSM(:,2)), 'g.', 'LineWidth', 0.5);
+plot(WT_GCAPs(:,1), WT_GCAPs(:,2)/max(WT_GCAPs(:,2)), '.', 'Color', ...
     [0.9290, 0.6940, 0.1250], 'LineWidth', 0.5);
 xlim([0 1]);
-ylim([0 5]);
-xlabel('time/s');
-ylabel('Scaled {\Delta}J');
+ylim([0 4.5]);
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 set(gca,'Fontsize',12);
 subplot(1,2,2);
 hold on;
 pbaspect([1 1 1]);
 text(0.025,0.95,'B','Units','normalized','FontSize',15);
-plot(time, average/max(average), 'k', 'LineWidth', 1);
+plot(time, average/max(average), 'k.', 'LineWidth', 1);
 plot(time, average_Arr/max(average), 'r', 'LineWidth', 1);
 plot(time, average_RK/max(average), 'b', 'LineWidth', 1);
 plot(time, average_CSM/max(average), 'g', 'LineWidth', 1);
 plot(time, average_GCAP/max(average), 'Color', [0.9290, 0.6940, 0.1250], 'LineWidth', 1);
 xlim([0 1]);
-xlabel('time/s');
-ylabel('Scaled {\Delta}J');
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 L = legend('WT', 'Arr -/-', 'Rk -/-', 'CSM', 'GCAPs -/-');
 L.FontSize = 10;
 L.ItemTokenSize = [15,9];
 set(gca,'Fontsize',12);
-ylim([0 5]);
+ylim([0 4]);
