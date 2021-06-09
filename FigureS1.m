@@ -19,12 +19,12 @@ hold on;
 plot(time, deltaJ_small/max(deltaJ_small), 'k', 'LineWidth', 1.5);
 plot(time, deltaJ_test/max(deltaJ_test), 'r--', 'LineWidth', 1.5);
 plot(time1-0.533, (avSPR-avSPR(2663))/max(avSPR(2500:5000)-avSPR(2663)), 'c-.', 'LineWidth', 1.5);
-xlabel('time/s');
-ylabel('scaled {\Delta}J');
+xlabel('time (s)');
+ylabel('Scaled Photocurrent');
 xlim([0 1.2]);
 ylim([-0.03 1.05]);
 legend('HSDM', 'Test', 'Experimental', 'Location', 'Northeast');
-set(gca, 'FontSize', 15);
+set(gca, 'FontSize', 18);
 
 %% TTP
 [maxvalue, index] = max(deltaJ_small)

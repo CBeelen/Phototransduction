@@ -55,12 +55,12 @@ end
 figure(1); clf;
 subplot(1,2,1);
 hold on;
-pbaspect([2 1 1]);
+pbaspect([1.5 1 1]);
 text(0.025,0.95,'A','Units','normalized','FontSize',15);
-xlim([9.5 13]);
+xlim([9.75 13]);
 ylim([-2 16]);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 set(gca,'FontSize',15)
 plot_lsf = plot(y0_less.time, deltaJ0_less{1}, '-', 'LineWidth', 2, 'Color', 'k');
 plot_lsf1 = plot(y1_less.time, deltaJ1_less{1}, '--', 'LineWidth', 2, 'Color', 'g');
@@ -70,19 +70,20 @@ title('Normal model');
 
 subplot(1,2,2);
 hold on;
-pbaspect([2 1 1]);
+pbaspect([1.5 1 1]);
 text(0.025,0.95,'B','Units','normalized','FontSize',15);
-xlim([9.5 13]);
+xlim([9.75 13]);
 ylim([-2 16]);
-xlabel('time/s');
-ylabel('{\Delta}J/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 set(gca,'FontSize',15)
 plot_lsf = plot(y0_less.time, deltaJ0_less{2}, '-', 'LineWidth', 2, 'Color', 'k');
 plot_lsf1 = plot(y1_less.time, deltaJ1_less{2}, '--', 'LineWidth', 2, 'Color', 'g');
 plot_lsf2 = plot(y2_less.time, deltaJ2_less{2}, '-.', 'LineWidth', 2, 'Color', 'r');
 plot_lsf3 = plot(y3_less.time, deltaJ3_less{2}, ':', 'LineWidth', 2, 'Color', 'b');
-legend('BG 0 ph/{\mu}m^2s', 'BG 698 ph/{\mu}m^2s', 'BG 1860 ph/{\mu}m^2s', ...
-    'BG 4651 ph/{\mu}m^2s', 'Location', 'northeast');
+legend('BG 0 photons*{\mu}m^{-2}s^{-1}', 'BG 698 photons*{\mu}m^{-2}s^{-1}',...
+    'BG 1860 photons*{\mu}m^{-2}s^{-1}', 'BG 4651 photons*{\mu}m^{-2}s^{-1}',...
+    'Location', 'northeast');
 title('Calcium Feedback on Rec missing');
 
 %% more data points for saturation times
@@ -214,8 +215,8 @@ for k=1:length(flashMag)
     p1 = plot(output_sim.time,deltaJ(:,k),'k-','LineWidth',1.5);
     p2 = plot(output_sim_new.time,deltaJ_new(:,k),'r--','LineWidth',1.5);
 end
-xlabel('time/s');
-ylabel('\DeltaJ/pA');
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 title('Flash Series without background');
 xlim([-0.25 5])
 ylim([-1 16])
@@ -230,7 +231,7 @@ plot(log(flashintensities/0.43), timeinsat(:,1), '+', 'Color', 'k', 'MarkerSize'
 plot(log(flashintensities/0.43), timeinsat(:,2), '*', 'Color', 'r', 'MarkerSize', 10);
 legend('Normal model', 'No Calcium Feedback on Rec', 'Location', 'southwest');
 xlabel('ln(L)','FontSize', 15);
-ylabel('T_{sat}/s','FontSize', 15);
+ylabel('T_{sat} (s)','FontSize', 15);
 set(gca,'FontSize',15);
 title('Saturation times with background');
 

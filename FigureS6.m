@@ -23,7 +23,7 @@ flashMag   = [0.731 2.064 6.536 16.942 53.75 190.92 604.58 1990.9];
 deltaJ = zeros(1001, length(flashMag));
 deltaJ_new = zeros(1001, length(flashMag));
 
-% Simulate
+%% Simulate
 for k=1:length(flashMag), k
     model_WT_kol_k = IQMparameters(model_WT_kol,'flashMag',flashMag(k));
     output_sim = IQMPsimulate(model_WT_kol_k,[0:0.005:5],[],[],[],options);
@@ -83,6 +83,7 @@ for m=1:length(models),
 							       exp_flash)];
 end
 
+%%
 deltaJ_bg = zeros(110001,length(models));
 deltaJ_bg_flash = zeros(110001,length(models));
 deltaJ_flash = zeros(110001,length(models));
@@ -152,22 +153,23 @@ figure(3); clf;
 subplot(1,3,1);
 hold on;
 pbaspect([1,1,1]);
-text(0.025,0.95,'A','Units','normalized','FontSize',12);
+text(0.025,0.95,'A','Units','normalized','FontSize',15);
 for k=1:length(flashMag)
     p1 = plot(output_sim.time,deltaJ(:,k),'k-','LineWidth',1);
     p2 = plot(output_sim_new.time,deltaJ_new(:,k),'r-','LineWidth',1);
 end
-xlabel('time/s','FontSize', 11);
-ylabel('\DeltaJ/pA','FontSize', 11);
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 title(' Jarvinen Flash Series');
 xlim([0 4])
-ylim([0 16])
+ylim([0 17])
 legend([p1 p2], 'Invergo 2014', 'Beelen 2020');
+set(gca, 'FontSize', 12)
 
 subplot(1,3,2);
 hold on;
 pbaspect([1,1,1]);
-text(0.025,0.95,'B','Units','normalized','FontSize',12);
+text(0.025,0.95,'B','Units','normalized','FontSize',15);
 for m=1:length(models)
     plot_bg = plot(y1.time, deltaJ_bg(:,m), [mod_lcols(m) '-.'], 'LineWidth', 1);
     plot_bg_flash = plot(y2.time, deltaJ_bg_flash(:,m), [mod_lcols(m) '--'], 'LineWidth', 1);
@@ -175,14 +177,15 @@ for m=1:length(models)
 end
 xlim([100 102]);
 ylim([4 16]);
-xlabel('time/s','FontSize', 11);
-ylabel('\DeltaJ/pA','FontSize', 11);
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 title('Light Adaptation: WT');
+set(gca, 'FontSize', 12)
 
 subplot(1,3,3);
 hold on;
 pbaspect([1,1,1]);
-text(0.025,0.95,'C','Units','normalized','FontSize',12);
+text(0.025,0.95,'C','Units','normalized','FontSize',15);
 for m=1:length(models)
     plot_bg_GCAP(m) = plot(y1.time, deltaJ_bg_GCAP(:,m), [mod_lcols(m) '-.'], 'LineWidth', 1);
     plot_bg_flash_GCAP(m) = plot(y2.time, deltaJ_bg_flash_GCAP(:,m), [mod_lcols(m) '--'], 'LineWidth', 1);
@@ -190,11 +193,12 @@ for m=1:length(models)
 end
 xlim([100 102]);
 ylim([8 16]);
-xlabel('time/s','FontSize', 11);
-ylabel('\DeltaJ/pA','FontSize', 11);
+xlabel('time (s)');
+ylabel('Photocurrent (pA)');
 title('Light Adaptation: GCAPs-/-');
 legend([plot_bg_GCAP(1) plot_bg_flash_GCAP(1) plot_flash_GCAP(1)], ...
     'Background','Background+flash', 'Flash', 'Location', 'Southwest');
+set(gca, 'FontSize', 12)
 
 
 

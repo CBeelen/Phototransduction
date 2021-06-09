@@ -88,16 +88,23 @@ ylabel('photovoltage');
 figure(6); clf;
 hold on;
 pbaspect([5 1 1]);
-plot(time, voltage_nice(:,1), 'k', 'Linewidth', 1.5);
-plot(time, voltage_nice(:,2), 'g', 'Linewidth', 1.5);
-plot(time, voltage_nice(:,3), 'r', 'Linewidth', 1.5);
-plot(time, voltage_nice(:,4), 'b', 'Linewidth', 1.5);
+plot(s{1,6}, voltage_nice(:,1), 'k', 'Linewidth', 1.5);
+plot(s{1,6}, voltage_nice(:,2), 'g', 'Linewidth', 1.5);
+plot(s{1,6}, voltage_nice(:,3), 'r', 'Linewidth', 1.5);
+plot(s{1,6}, voltage_nice(:,4), 'b', 'Linewidth', 1.5);
+xline(4.906, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1)
+xline(8.908, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1)
+xline(14.91, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1)
+xline(22.91, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1)
+xline(32.92, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1)
 xlim([4 38]);
-ylim([-1.1 0.2])
+ylim([-1.1 0.15])
 set(gca, 'Fontsize', 15);
-legend('BG 0 ph/{\mu}m^2s', 'BG 8.5 ph/{\mu}m^2s', 'BG 252 ph/{\mu}m^2s', 'BG 695 ph/{\mu}m^2s', 'Location', 'southwest');
-xlabel('time/s');
-ylabel('scaled {\Delta}U');
+legend('BG 0 photons*{\mu}m^{-2}s^{-1}', 'BG 8.5 photons*{\mu}m^{-2}s^{-1}',...
+    'BG 252 photons*{\mu}m^{-2}s^{-1}', 'BG 695 photons*{\mu}m^{-2}s^{-1}',...
+    'Light stimuli', 'Location', 'southwest');
+xlabel('time (s)');
+ylabel('Scaled Photovoltage');
 text(0.025,0.95,'A','Units','normalized','FontSize',20)
 
 %% simulation
@@ -205,11 +212,11 @@ for i = 1:length(flashBGs)
 end
 %% determine measurement response max to EACH SINGLE FLASH
 for i = 1:length(flashBGs)
-    measmax{1,i} = max(photocurrent_nice(6000:11000,i));
-    measmax{2,i} = max(photocurrent_nice(26000:31000,i));
-    measmax{3,i} = max(photocurrent_nice(56000:61000,i));
-    measmax{4,i} = max(photocurrent_nice(96000:102500,i));
-    measmax{5,i} = max(photocurrent_nice(144500:154500,i));
+    measmax(1,i) = max(photocurrent_nice(6000:11000,i));
+    measmax(2,i) = max(photocurrent_nice(26000:31000,i));
+    measmax(3,i) = max(photocurrent_nice(56000:61000,i));
+    measmax(4,i) = max(photocurrent_nice(96000:102500,i));
+    measmax(5,i) = max(photocurrent_nice(144500:154500,i));
 end
 
 %%
@@ -217,78 +224,98 @@ end
 colour = ['k', 'g', 'r', 'b'];
 for i=1:length(flashBGs)
     deltaJ1{i} = (simulation1(i).variablevalues(:, variableindexIQM(modelexp, 'deltaJ'))...
-        -backgroundJ{i})/maxresponse{1,i}*measmax{1,i}/measmax{5,i};
+        -backgroundJ{i})/maxresponse{1,i}*measmax(1,i)/measmax(5,i);
     deltaJ2{i} = (simulation2(i).variablevalues(:, variableindexIQM(modelexp, 'deltaJ'))...
-        -backgroundJ{i})/maxresponse{2,i}*measmax{2,i}/measmax{5,i};
+        -backgroundJ{i})/maxresponse{2,i}*measmax(2,i)/measmax(5,i);
     deltaJ3{i} = (simulation3(i).variablevalues(:, variableindexIQM(modelexp, 'deltaJ'))...
-        -backgroundJ{i})/maxresponse{3,i}*measmax{3,i}/measmax{5,i};
+        -backgroundJ{i})/maxresponse{3,i}*measmax(3,i)/measmax(5,i);
     deltaJ4{i} = (simulation4(i).variablevalues(:, variableindexIQM(modelexp, 'deltaJ'))...
-        -backgroundJ{i})/maxresponse{4,i}*measmax{4,i}/measmax{5,i};
+        -backgroundJ{i})/maxresponse{4,i}*measmax(4,i)/measmax(5,i);
     deltaJ5{i} = (simulation5(i).variablevalues(:, variableindexIQM(modelexp, 'deltaJ'))...
-        -backgroundJ{i})/maxresponse{5,i}*measmax{5,i}/measmax{5,i};
+        -backgroundJ{i})/maxresponse{5,i}*measmax(5,i)/measmax(5,i);
 end
 
 %% PUBLICATION FIGURE 9B-E
 % flash 1 and 2
-figure(7);
+figure(7); clf;
 subplot(2,2,1);
 hold on;
-text(0.025,0.95,'B','Units','normalized','FontSize',10)
+text(0.025,0.95,'B','Units','normalized','FontSize',15)
 pbaspect([1 1 1]);
-plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,1)/measmax{5,1}, 'k', 'linewidth', 1.5);
-plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,2)/measmax{5,2}, 'g', 'linewidth', 1.5);
-plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,3)/measmax{5,3}, 'r', 'linewidth', 1.5);
-plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,4)/measmax{5,4}, 'b', 'linewidth', 1.5);
-ylabel('Scaled {\Delta}J');
-xlabel('time/s');
+plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,1)/measmax(5,1), 'k', 'linewidth', 1.5);
+plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,2)/measmax(5,2), 'g', 'linewidth', 1.5);
+plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,3)/measmax(5,3), 'r', 'linewidth', 1.5);
+plot(s{1,6}(6000:16000), photocurrent_nice(6000:16000,4)/measmax(5,4), 'b', 'linewidth', 1.5);
+xline(4.906, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1.5)
+ylabel('Scaled Photocurrent');
+xlabel('time (s)');
 ylim([-0.02 0.12]);
 xlim([4.7 6.7]);
 set(gca,'Fontsize',12);
 title('Flash 1, exp.');
-legend('BG 0 ph/{\mu}m^2', 'BG 8.5 ph/{\mu}m^2', 'BG 252 ph/{\mu}m^2', 'BG 695 ph/{\mu}m^2', 'Location', 'northeast');
+legend('BG 0 photons*{\mu}m^{-2}s^{-1}', 'BG 8.5 photons*{\mu}m^{-2}s^{-1}',...
+    'BG 252 photons*{\mu}m^{-2}s^{-1}', 'BG 695 photons*{\mu}m^{-2}s^{-1}',...
+    'Light stimulus', 'Location', 'northeast');
 subplot(2,2,2);
 hold on;
-text(0.025,0.95,'C','Units','normalized','FontSize',10)
+text(0.025,0.95,'C','Units','normalized','FontSize',15)
 pbaspect([1 1 1]);
 plot(time(4700:6700), deltaJall(1,4700:6700), 'k', 'linewidth', 1.5);
 plot(time(4700:6700), deltaJall(2,4700:6700), 'g', 'linewidth', 1.5);
 plot(time(4700:6700), deltaJall(3,4700:6700), 'r', 'linewidth', 1.5);
 plot(time(4700:6700), deltaJall(4,4700:6700), 'b', 'linewidth', 1.5);
+xline(4.906, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1.5)
 ylim([-0.02 0.12]);
 xlim([4.7 6.7]);
-ylabel('Scaled {\Delta}J');
-xlabel('time/s');
+ylabel('Scaled Photocurrent');
+xlabel('time (s)');
 set(gca,'Fontsize',12);
 title('Flash 1, sim.');
 
 subplot(2,2,3);
 hold on;
 pbaspect([1 1 1]);
-text(0.025,0.95,'D','Units','normalized','FontSize',10)
-plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,1)/measmax{5,1}, 'k', 'linewidth', 1.5);
-plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,2)/measmax{5,2}, 'g', 'linewidth', 1.5);
-plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,3)/measmax{5,3}, 'r', 'linewidth', 1.5);
-plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,4)/measmax{5,4}, 'b', 'linewidth', 1.5);
-ylabel('Scaled {\Delta}J');
-xlabel('time/s');
-%ylim([-0.02 0.3]);
+text(0.025,0.95,'D','Units','normalized','FontSize',15)
+plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,1)/measmax(5,1), 'k', 'linewidth', 1.5);
+plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,2)/measmax(5,2), 'g', 'linewidth', 1.5);
+plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,3)/measmax(5,3), 'r', 'linewidth', 1.5);
+plot(s{1,6}(26000:36000), photocurrent_nice(26000:36000,4)/measmax(5,4), 'b', 'linewidth', 1.5);
+xline(8.908, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1.5)
+ylabel('Scaled Photocurrent');
+xlabel('time (s)');
+ylim([-0.05 0.25]);
 xlim([8.7 10.7]);
 set(gca,'Fontsize',12);
 title('Flash 2, exp.');
 subplot(2,2,4);
 hold on;
-text(0.025,0.95,'E','Units','normalized','FontSize',10)
+text(0.025,0.95,'E','Units','normalized','FontSize',15)
 pbaspect([1 1 1]);
 plot(time(8700:10700), deltaJall(1,8700:10700), 'k', 'linewidth', 1.5);
 plot(time(8700:10700), deltaJall(2,8700:10700), 'g', 'linewidth', 1.5);
 plot(time(8700:10700), deltaJall(3,8700:10700), 'r', 'linewidth', 1.5);
 plot(time(8700:10700), deltaJall(4,8700:10700), 'b', 'linewidth', 1.5);
-%ylim([-0.02 0.3]);
+xline(8.908, 'Color', [0.9290, 0.6940, 0.1250], 'Linewidth', 1.5)
+ylim([-0.05 0.25]);
 xlim([8.7 10.7]);
-ylabel('Scaled {\Delta}J');
-xlabel('time/s');
+ylabel('Scaled Photocurrent');
+xlabel('time (s)');
 set(gca,'Fontsize',12);
 title('Flash 2, sim.');
+
+%% Dose response plot
+figure(8); clf,
+hold on;
+plot(log(flashMags), measmax(:,1)/measmax(5,1), 'k-o')
+plot(log(flashMags), measmax(:,2)/measmax(5,2), 'g-o')
+plot(log(flashMags), measmax(:,3)/measmax(5,3), 'r-o')
+plot(log(flashMags), measmax(:,4)/measmax(5,4), 'b-o')
+xlabel('log(L) of flash')
+ylabel('Amplitude')
+set(gca, 'FontSize', 12)
+legend('BG 0 photons*{\mu}m^{-2}s^{-1}', 'BG 8.5 photons*{\mu}m^{-2}s^{-1}',...
+    'BG 252 photons*{\mu}m^{-2}s^{-1}', 'BG 695 photons*{\mu}m^{-2}s^{-1}',...
+    'Location', 'northwest');
 
 %% Photovoltage: determine measurement response max to EACH SINGLE FLASH
 for i = 1:length(flashBGs)
@@ -339,7 +366,7 @@ for i = 1:4 % all backgrounds
 end
 
 %% PUBLICATION FIGURE S9
-figure(8);
+figure(9);
 subplot(1,2,1);
 hold on;
 pbaspect([1 1 1]);
@@ -366,6 +393,7 @@ ylim([0.4 1.2]);
 title('Simulation');
 xlabel('log(L) of flash');
 ylabel('T_{half} reduction');
-legend('BG 0 ph/{\mu}m^2s', 'BG 8.5 ph/{\mu}m^2s', 'BG 252 ph/{\mu}m^2s', ...
-    'BG 695 ph/{\mu}m^2s', 'Location', 'southeast');
+legend('BG 0 photons*{\mu}m^{-2}s^{-1}', 'BG 8.5 photons*{\mu}m^{-2}s^{-1}',...
+    'BG 252 photons*{\mu}m^{-2}s^{-1}', 'BG 695 photons*{\mu}m^{-2}s^{-1}',...
+    'Location', 'southeast');
 set(gca, 'FontSize', 12);

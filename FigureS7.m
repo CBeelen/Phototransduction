@@ -6,7 +6,7 @@ model = IQMmodel('Models/DM.txtbc');
 %% simulation (will take a while)
 time = 0:0.01:3;
 model.states(stateindexIQM(model, 'R0')).initialCondition = 1; % single photon response
-simulation = IQMsimulate(model, time);
+simulation = IQMPsimulate(model, time);
 
 %%
 R0 = simulation.statevalues(:, stateindexIQM(model, 'R0')) +...
@@ -70,7 +70,7 @@ plot(time, R4, 'b', 'LineWidth', 1);
 plot(time, R5, 'm', 'LineWidth', 1);
 plot(time, R6, 'k', 'LineWidth', 1);
 legend('R0', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6');
-xlabel('time/s');
+xlabel('time (s)');
 ylabel('Species numbers');
 set(gca, 'FontSize', 12);
 
@@ -87,5 +87,5 @@ plot(time, R5, 'm', 'LineWidth', 1);
 plot(time, R6, 'k', 'LineWidth', 1);
 set(gca, 'YScale', 'log', 'FontSize', 12);
 ylim([1e-25 500]);
-xlabel('time/s');
+xlabel('time (s)');
 ylabel('Species numbers');

@@ -92,8 +92,8 @@ plot(time-0.53, -s{17}/1e-3, 'k');
 plot(time-0.53, -s{18}/1e-3, 'k');
 p1 = plot(time-0.53, -s{19}/1e-3, 'k');
 p2 = plot(time-0.53, -meanr/1e-3, 'r', 'LineWidth', 1.2);
-xlabel('time/s');
-ylabel('{\Delta}U/mV');
+xlabel('time (s)');
+ylabel('Photovoltage (mV)');
 xlim([-0.2 1.5]);
 ylim([-1.2 4.5]);
 set(gca,'Fontsize',10);
@@ -109,11 +109,10 @@ xlim([-0.1,1.5]);
 ylim([-1,4.5]);
 plot(time-0.53, -s{1,i}/1e-3, 'k', 'lineWidth', 1.5);
 plot(time-0.53, -scaling3(i)*meanr/1e-3, 'r', 'lineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}U/mV');
+xlabel('time (s)');
+ylabel('Photovoltage (mV)');
 set(gca,'Fontsize',10);
 legend('Recording', 'Fitted Mean');
-xlim([0.1 1.5]);
 title('Scale mean...')
 
 subplot(2,3,3);
@@ -125,8 +124,8 @@ xlim([-0.1,1.5]);
 ylim([-1,4.5]);
 plot(time-0.53, -s{1,i}/1e-3, 'k', 'lineWidth', 1.5);
 plot(time-0.53, -scaling3(i)*meanr/1e-3, 'r', 'lineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}U/mV');
+xlabel('time (s)');
+ylabel('Photovoltage (mV)');
 set(gca,'Fontsize',10);
 legend('Recording', 'Fitted Mean');
 title('...to each...')
@@ -140,8 +139,8 @@ xlim([-0.1,1.5]);
 ylim([-1,4.5]);
 plot(time-0.53, -s{1,i}/1e-3, 'k', 'lineWidth', 1.5);
 plot(time-0.53, -scaling3(i)*meanr/1e-3, 'r', 'lineWidth', 1.5);
-xlabel('time/s');
-ylabel('{\Delta}U/mV');
+xlabel('time (s)');
+ylabel('Photovoltage (mV)');
 set(gca,'Fontsize',10);
 legend('Recording', 'Fitted Mean');
 title('...recording');
@@ -168,15 +167,17 @@ subplot(2,3,6)
 hold on;
 pbaspect([1 1 1]);
 text(0.025,0.95,'F','Units','normalized','FontSize',12);
-text(0.05,0.6,'Failures','Units','normalized','FontSize',10);
-text(0.22,0.97,'SPRs','Units','normalized','FontSize',10);
+text(0.02,0.6,'Failures','Units','normalized','FontSize',10);
+text(0.24,0.97,'SPRs','Units','normalized','FontSize',10);
 text(0.6,0.7,'MPRs','Units','normalized','FontSize',10);
 plot(tbl{:,1}, tbl{:,2}, 'k', 'linewidth', 1.5);
 plot(time_fit, exp_fit, 'r', 'linewidth', 1.5);
+xline(0.12, '--', 'LineWidth', 1.5)
+xline(0.93, '--', 'LineWidth', 1.5)
 xlabel('Scaling factor');
 ylabel('Counts');
 set(gca,'Fontsize',10);
-legend('Histogram', 'Fit');
+legend('Histogram', 'Fit', 'Intersections');
 xlim([-1 4]);
 ylim([0 15]);
 title('Fit Sum of Gaussians to Histogram');
