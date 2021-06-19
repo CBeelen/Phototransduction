@@ -1,0 +1,271 @@
+\documentclass[a4paper, 12pt]{book}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{nicefrac}
+
+\usepackage[					% page layout modifications
+	paper=a4paper,					% 	- use A4 paper size
+	%scale={0.86,0.94},				% 	- total body size (h,v)
+	%scale={0.86,0.94},				% 	- total body size (h,v)
+	nohead,							% 	- no header
+	%includefoot,					% 	- include footer space
+	includemp,						% 	- include side note space
+	bindingoffset=0.5cm,			% 	- binding correction
+	top=2.5cm,						% 	- total body: top margin
+	left=2.4cm,						% 	- total body: left margin (odd pages)
+	right=0.05cm,					% 	- total body: right margin (odd pages)
+	bottom=1.25cm,					% 	- total body: bottom margin
+	%marginparwidth=1.75cm,			% 	- width for side note
+	%marginparsep=10pt,				% 	- space between notes and body text (content)
+	footskip=2cm,				% 	- footer skip size
+]{geometry}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\section*{Deterministic model (DM)}
+
+The DM is equivalent to the Invergo 2014 model [21] with the following changes:
+
+\begin{table}[H]
+\centering
+\caption{Reaction equation changes in the DM.}
+\label{tab_det_model}
+\begin{tabular}{l | l | l}
+Reaction & Former rate & New rate\\
+\hline
+\hline
+$\rightarrow {\rm cGMP}$ & $v_{\rm f} = \frac{\alpha_{\rm max}}{1 + \bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C1}} \bigr)^{m_1}  } + \frac{\alpha_{\rm max}}{1 + \bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C2}} \bigr)^{m_2}  }  $ & $v_{\rm f} = f_1 \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C1}}\bigr)^{m_1}} + f_{\rm 1m} \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C1m}}\bigr)^{m_{\rm 1m}}} + ...$\\
+ & & $ + f_2 \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C2}}\bigr)^{m_2}}$
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Parameter changes and new parameters in the DM.}
+\label{tab_det_model}
+\begin{tabular}{l | l | l | l}
+Parameter & Former Value & New Value & Significance\\
+\hline
+\hline
+$k_{\rm G3}$ & $8500/\mathrm{s}$ & $250/\mathrm{s}$ & Coupling rhodopsin - G-protein\\
+\hline
+$\beta_{\rm sub}$ & $2.1826 \cdot 10^{-3}/\mathrm{s}$ & $0.019/\mathrm{s}$ & cGMP hydrolysis by the effector\\
+\hline
+$\alpha_{\rm max}$ & $60 \mu {\rm M}/s$ & $120 \mu {\rm M}/s$ & Maximal rate of cGMP synthesis by the GCs\\
+\hline
+$K_{\rm C1m}$ & N/A & $ 0.171\,\mu\mathrm{M}$ & Calcium concentration at which cGMP synthesis is\\
+ & & &  half-maximal for potential mutant\\
+\hline
+$m_{1m}$ & N/A & $3$ & Hill coefficient for cGMP synthesis for potential mutant\\
+\hline
+$f_1$ & N/A & $0.5$ & Fraction of the cGMP synthesis regulated by wild type\\
+ & & & GCAP1\\
+\hline
+$f_1m$ & N/A & $0$ & Fraction of the cGMP synthesis regulated by potential\\
+ & & & mutant GCAP1\\
+\hline
+$f_2$ & N/A & $0.5$ & Fraction of the cGMP synthesis regulated by wild type\\
+ & & & GCAP2\\
+\end{tabular}
+\end{table}
+
+Please note: there is an option to include a GCAP1 mutant in the model, but in this case the parameters for the mutant were set to wild type values.
+
+\section*{Hybrid stochastic-deterministic model}
+\label{sec_appendix_small}
+The backend for the HSDM was directly transferred from the DM, with one further change: $\beta_{\rm sub}$ was changed to $0.01/\mathrm{s}$.\\
+Please note that the number of available phosphorylation sites was reduced to three in this model, and therefore rhodopsin's phosphorylation state $n$ goes from zero to three.\\
+
+\newgeometry{left=0.5cm,right=0.5cm}
+\begin{table}[H]
+\centering
+\caption{Reaction equations in the HSDM frontend.}
+\begin{tabular}{c | l | l}
+Nr. & Reaction equation & Rate \\
+\hline
+\hline
+1 & ${\rm R}_n + {\rm RK} \leftrightarrow {\rm R}_n\_{\rm RK}_{\rm pre}$ & $v_{\rm f} = k_{{\rm RK1,}n} \cdot {\rm RK} \cdot {\rm R}_n$\\
+ & & $v_{\rm r} =  k_{\rm RK2} \cdot {\rm R}_n\_{\rm RK}_{\rm pre} $\\
+\hline
+2 & ${\rm R}_n\_{\rm RK}_{\rm pre} \rightarrow {\rm R}_{n+1}\_{\rm RK}_{\rm post}$ & $v_{\rm f} =  k_{\rm RK3,ATP} \cdot {\rm R}_n\_{\rm RK}_{\rm pre} $\\
+\hline
+3 & ${\rm R}_{n+1}\_{\rm RK}_{\rm post} \rightarrow {\rm R}_{n+1} + {\rm RK}$ & $v_{\rm f} =  k_{\rm RK4} \cdot {\rm R}_{n+1}\_{\rm RK}_{\rm post} $\\
+\hline
+4 & ${\rm Arr} + {\rm R}_n \leftrightarrow {\rm R}_n\_{\rm Arr}$ & $v_{\rm f} = k_{{\rm A1,}n} \cdot {\rm Arr} \cdot {\rm R}_n $\\
+ & & $v_{\rm r} = k_{\rm A2} \cdot {\rm R}_n\_{\rm Arr} $\\
+\hline
+5 & ${\rm R}_n\_{\rm Arr} \rightarrow {\rm Arr}$ & $v_{\rm f} =  k_{\rm A3} \cdot {\rm R}_n\_{\rm Arr} $\\
+\hline
+6 & ${\rm R}\_{\rm Gt} \rightarrow {\rm Gt} + {\rm R}$ & $v_{\rm f} =  k_{\rm Gpre2} \cdot {\rm R}\_{\rm Gt} - k_{\rm Gpre1} \cdot {\rm R} \cdot {\rm Gt} $\\
+\hline
+7 & ${\rm Gt} + {\rm R}_n \leftrightarrow {\rm R}_n\_{\rm Gt}$ & $v_{\rm f} = k_{{\rm G1,}n} \cdot {\rm Gt} \cdot {\rm R}_n $\\
+ & & $v_{\rm r} = k_{\rm G2} \cdot {\rm R}_n\_{\rm Gt}$\\
+\hline
+8 & ${\rm R}_n\_{\rm Gt} \leftrightarrow {\rm R}_n\_{\rm G}$ & $v_{\rm f} = k_{\rm G3} \cdot {\rm R}_n\_{\rm Gt}$\\
+ & & $v_{\rm r} = k_{\rm G4,GDP} \cdot {\rm R}_n\_{\rm G} $\\
+\hline
+9 & ${\rm R}_n\_{\rm G} \rightarrow {\rm R}_n\_{\rm G}_{\rm GTP}$ & $v_{\rm f} = k_{\rm G5,GTP} \cdot {\rm R}_n\_{\rm G}$\\
+\hline
+10 & ${\rm R}_n\_{\rm G}_{\rm GTP} \rightarrow {\rm R}_n + {\rm G}_{GTP}$ & $v_{\rm f} = k_{\rm G6} \cdot {\rm R}_n\_{\rm G}_{\rm GTP}$\\
+\hline
+11 & ${\rm G}_{\rm GTP} \rightarrow {\rm G}_{\alpha{\rm GTP}} + {\rm G}_{\beta\gamma}$ & $v_{\rm f} =  k_{\rm G7} \cdot {\rm G}_{\rm GTP}$\\
+\hline
+12 & ${\rm PDE} + {\rm G}_{\alpha{\rm GTP}} \leftrightarrow {\rm PDE}\_{\rm G}_{\alpha{\rm GTP}}$ & $v_{\rm f} = k_{\rm P1} \cdot {\rm PDE} \cdot {\rm G}_{\alpha{\rm GTP}}$\\
+ & & $v_{\rm r} = k_{\rm P1_{rev}} \cdot {\rm PDE}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+13 & $ {\rm PDE}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $ & $v_{\rm f} =  k_{\rm P2} \cdot {\rm PDE}\_{\rm G}_{\alpha{\rm GTP}}$\\
+\hline
+14 & $ {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm G}_{\alpha{\rm GTP}} \leftrightarrow {\rm G}_{\alpha{\rm GTP}}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}}$ & $v_{\rm f} =  k_{\rm P3} \cdot {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \cdot {\rm G}_{\alpha{\rm GTP}} $\\
+ & & $v_{\rm r} = k_{\rm P3_{rev}} \cdot {\rm G}_{\alpha{\rm GTP}}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+15 & $ {\rm G}_{\alpha{\rm GTP}}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}}$ & $v_{\rm f} =  k_{\rm P4} \cdot {\rm G}_{\alpha{\rm GTP}}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+16 & ${\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm RGS} \rightarrow {\rm RGS}\_{\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}}$ & $v_{\rm f} =  k_{\rm RGS1} \cdot {\rm RGS} \cdot {\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+17 & ${\rm RGS}\_{\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm G}_{\alpha{\rm GDP}} + {\rm RGS} $ & $v_{\rm f} =  k_{\rm RGS2} \cdot {\rm RGS}\_{\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+18 & ${\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm RGS} \rightarrow {\rm RGS}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}}$ & $v_{\rm f} =  k_{\rm RGS1} \cdot {\rm RGS} \cdot {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+19 & ${\rm RGS}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm PDE} + {\rm G}_{\alpha{\rm GDP}} + {\rm RGS} $ & $v_{\rm f} =  k_{\rm RGS2} \cdot {\rm RGS}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+20 & ${\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm PDE} + {\rm G}_{\alpha{\rm GDP}} $ & $v_{\rm f} =  k_{\rm PDE_{shutoff}} \cdot {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+21 & ${\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm G}_{\alpha{\rm GDP}} $ & $v_{\rm f} =  k_{\rm PDE_{shutoff}} \cdot {\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} $\\
+\hline
+22 & ${\rm G}_{\alpha{\rm GTP}} \rightarrow {\rm G}_{\alpha{\rm GDP}}$ & $v_{\rm f} =  k_{\rm G_{shutoff}} \cdot {\rm G}_{\alpha{\rm GTP}}$\\
+\hline
+23 & $ {\rm G}_{\beta\gamma} + {\rm G}_{\alpha{\rm GDP}} \rightarrow {\rm Gt}$ & $v_{\rm f} =  k_{\rm G_{recyc}} \cdot  {\rm G}_{\beta\gamma} \cdot {\rm G}_{\alpha{\rm GDP}} $\\
+\hline
+\end{tabular}
+\end{table}
+\restoregeometry
+
+In the following table, parameters that have been changed with respect to the mouse model (and not only scaled) are marked in red.
+
+\begin{table}[H]
+\centering
+\caption{Parameters in the HSDM frontend.}
+\begin{tabular}{l | l | l | l}
+Name & Unscaled value & Scaling & Scaled value \\
+\hline
+\hline
+$k_{{\rm RK1,}n}$ & 
+$\begin{cases}
+k_{{\rm RK1},0} \cdot e^{-\omega \cdot n} & n < 3 \\
+0 & n=3
+\end{cases}$ & N/A & 
+$\begin{cases}
+k_{{\rm RK1},0} \cdot e^{-\omega \cdot n} & n < 3 \\
+0 & n=3
+\end{cases}$\\
+\hline
+\textcolor{red}{$k_{{\rm RK1},0}$} & 0.03103 & $\cdot 580$ & $18/\mathrm{s}$\\
+\hline
+$\omega$ & $2.5$ & N/A & 2.5\\
+\hline
+$k_{\rm RK2}$ & $250/\mathrm{s}$ & N/A & $250/\mathrm{s}$\\
+\hline
+$k_{\rm RK3,ATP}$ & $4000/\mathrm{s}$ & N/A & $4000/\mathrm{s}$\\
+\hline
+$k_{\rm RK4}$ & $250/\mathrm{s}$ & N/A & $250/\mathrm{s}$\\
+\hline
+$k_{{\rm A1,}n}$ & $k_{\rm Arr} + (n-1) m_{\rm Arr}$ & N/A & $k_{\rm Arr} + (n-1) m_{\rm Arr}$\\
+\hline
+$k_{\rm Arr}$ & $9.9147\cdot 10^{-6}/\mathrm{s}$ & $\cdot 580$ & $5.751\cdot 10^{-3}/\mathrm{s}$ \\
+\hline
+$m_{\rm Arr}$ & $9.5475\cdot 10^{-6}$ & $\cdot 580$ & $5.538\cdot 10^{-3}/\mathrm{s}$\\
+\hline
+$k_{\rm A2}$ & $0.026/\mathrm{s}$ & N/A & $0.026/\mathrm{s}$\\
+\hline
+$k_{\rm A3}$ & $1.1651/\mathrm{s}$ & N/A & $1.1651/\mathrm{s}$\\
+\hline
+$k_{Gpre1}$ & $1.6\cdot 10^{-3}$ & $\cdot 580^2$ & $538.4/\mathrm{s}$\\
+\hline
+$k_{Gpre2}$ & $6.93\cdot 10^5$ & $\cdot 580$ & $4.019\cdot 10^8/\mathrm{s}$\\
+\hline
+$k_{{\rm G1},n}$ &  $k_{{\rm G1},0} \cdot e^{-\omega_{\rm G} \cdot n}$ & N/A & $k_{{\rm G1},0} \cdot e^{-\omega_{\rm G} \cdot n}$\\
+\hline
+\textcolor{red}{$k_{{\rm G1},0}$} & $2.5862\cdot 10^{-3}$ & $\cdot 580$ & $1.5/\mathrm{s}$\\
+\hline
+$\omega_{\rm G}$ & 0.6 & N/A & 0.6\\
+\hline
+\textcolor{red}{$k_{\rm G2}$} & $2600/\mathrm{s}$ & N/A & $2600/\mathrm{s}$\\
+\hline
+\textcolor{red}{$k_{\rm G3}$} & $85000/\mathrm{s}$ & N/A & $85000/\mathrm{s}$\\
+\hline
+$k_{\rm G4}$ & $400/\mathrm{s}$ & N/A & $400/\mathrm{s}$\\
+\hline
+\textcolor{red}{$k_{\rm G5,GTP}$} & $ 12000/\mathrm{s}$ & N/A & $ 12000/\mathrm{s}$\\
+\hline
+\textcolor{red}{$k_{\rm G6}$} & $ 85000/\mathrm{s}$ & N/A &  $ 85000/\mathrm{s}$\\
+\hline
+$k_{\rm G7}$ & $ 200/\mathrm{s}$ & N/A & $200/\mathrm{s}$\\
+\hline
+$k_{\rm P1}$ & $0.05497/\mathrm{s}$ & $\cdot 580$ & $ 31.8826/\mathrm{s}$ \\
+\hline
+\textcolor{red}{$k_{\rm P1_{rev}}$} & $ 100/\mathrm{s}$ & N/A & $ 100/\mathrm{s}$\\
+\hline
+$k_{\rm P2}$ & $ 940.7/\mathrm{s}$ & N/A & $ 940.7/\mathrm{s}$\\
+\hline
+\textcolor{red}{$k_{\rm P3}$} & $ 0.05497/\mathrm{s}$ & $\cdot 580$ & $31.8826/\mathrm{s}$ \\
+\hline
+\textcolor{red}{$k_{\rm P3_{rev}}$} & $ 3000/\mathrm{s}$ & N/A & $ 3000/\mathrm{s}$\\
+\hline
+\textcolor{red}{$k_{\rm P4}$} & $ 940.7/\mathrm{s}$ & N/A & $ 940.7/\mathrm{s}$ \\
+\hline
+\textcolor{red}{$k_{\rm RGS1}$} & $ 1.0344 \cdot 10^{-4}/\mathrm{s}$ & $\cdot 580$ & $0.06/\mathrm{s}$ \\
+\hline
+\textcolor{red}{$k_{\rm RGS2}$} & $ 140/\mathrm{s}$ & N/A & $ 140/\mathrm{s}$ \\
+\hline
+$k_{\rm PDE_{shutoff}}$ & $ 0.1/\mathrm{s}$ & N/A &  $ 0.1/\mathrm{s}$\\
+\hline
+$k_{\rm G_{shutoff}}$ & $ 0.05/\mathrm{s}$ & N/A & $ 0.05/\mathrm{s}$ \\
+\hline
+$k_{\rm G_{recyc}}$ & $ 2/\mathrm{s}$ & N/A & $ 2/\mathrm{s}$\\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+All initial conditions have been reduced by a scaling factor of $1/580$, as given below, except for the activated rhodopsin (${\rm R0}(0)$ or the precoupled ${\rm R0}\_{\rm Gt}(0)$).
+
+\begin{table}[H]
+\centering
+\caption{Nonzero initial conditions in the HSDM frontend.}
+\begin{tabular}{l | l}
+Species & Molecules \\
+\hline
+\hline
+${\rm R0}(0)$ & 0 or 1\\
+\hline
+${\rm R0}\_{\rm Gt}(0)$ & 0 or 1\\
+\hline
+${\rm R}(0)$ & 169228\\
+\hline
+${\rm Gt}(0)$ & 14056\\
+\hline
+${\rm R}\_{\rm Gt}(0)$ & 3185\\
+\hline
+${\rm PDE}(0)$ & 3448 \\
+\hline
+${\rm Arr}(0)$ & 2174\\
+\hline
+${\rm RK}(0)$ & 1\\
+\hline
+${\rm RGS}(0)$ & 172\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
