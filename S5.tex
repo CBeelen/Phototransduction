@@ -66,12 +66,12 @@ $\alpha_{\rm max}$ & $60 \mu {\rm M}/s$ & $120 \mu {\rm M}/s$ & Maximal rate of 
 $K_{\rm C1m}$ & N/A & $ 0.171\,\mu\mathrm{M}$ & Calcium concentration at which cGMP synthesis is\\
  & & &  half-maximal for potential mutant\\
 \hline
-$m_{1m}$ & N/A & $3$ & Hill coefficient for cGMP synthesis for potential mutant\\
+$m_{\rm 1m}$ & N/A & $3$ & Hill coefficient for cGMP synthesis for potential mutant\\
 \hline
 $f_1$ & N/A & $0.5$ & Fraction of the cGMP synthesis regulated by wild type\\
  & & & GCAP1\\
 \hline
-$f_1m$ & N/A & $0$ & Fraction of the cGMP synthesis regulated by potential\\
+$f_{\rm 1m}$ & N/A & $0$ & Fraction of the cGMP synthesis regulated by potential\\
  & & & mutant GCAP1\\
 \hline
 $f_2$ & N/A & $0.5$ & Fraction of the cGMP synthesis regulated by wild type\\
@@ -83,7 +83,6 @@ Please note: there is an option to include a GCAP1 mutant in the model, but in t
 
 \section*{Hybrid stochastic-deterministic model}
 \label{sec_appendix_small}
-The backend for the HSDM was directly transferred from the DM, with one further change: $\beta_{\rm sub}$ was changed to $0.01/\mathrm{s}$.\\
 Please note that the number of available phosphorylation sites was reduced to three in this model, and therefore rhodopsin's phosphorylation state $n$ goes from zero to three.\\
 
 \newgeometry{left=0.5cm,right=0.5cm}
@@ -150,7 +149,7 @@ Nr. & Reaction equation & Rate \\
 \end{table}
 \restoregeometry
 
-In the following table, parameters that have been changed with respect to the mouse model (and not only scaled) are marked in red.
+In the following table, parameters that have been changed with respect to the Invergo model (and not only scaled) are marked in red.
 
 \begin{table}[H]
 \centering
@@ -264,6 +263,114 @@ ${\rm Arr}(0)$ & 2174\\
 ${\rm RK}(0)$ & 1\\
 \hline
 ${\rm RGS}(0)$ & 172\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Reaction equations in the HSDM backend.}
+\label{tab_reacts_mouse}
+\begin{tabular}{c | l | l}
+Nr. & Reaction equation & Rate \\
+\hline
+\hline
+24 & ${\rm Ca}^{2+}_{\rm free} \leftrightarrow {\rm Ca}^{2+}_{\rm buff}$ & $v_{\rm f} = k_1 \cdot \left( e_{\rm T} - {\rm Ca}^{2+}_{\rm buff} \right) \cdot {\rm Ca}^{2+}_{\rm free} $\\
+ & & $v_{\rm r} = k_2 \cdot {\rm Ca}^{2+}_{\rm buff}$\\
+\hline
+25 & ${\rm Ca}^{2+}_{\rm free} \rightarrow $ & $v_{\rm f} =  \gamma_{\rm Ca} \cdot \left({\rm Ca}^{2+}_{\rm free} - {\rm Ca}^{2+}_{0} \right) $\\
+\hline
+26 & $ \rightarrow {\rm Ca}^{2+}_{\rm free}$ & $v_{\rm f} = \frac{10^6 \cdot f_{\rm Ca} \cdot J_{\rm dark}}{\left(2+f_{\rm Ca} \right)\cdot F \cdot V_{\rm cyto}} \cdot \left(\frac{{\rm cGMP}}{{\rm cGMP}_{\rm dark}}\right)^{n_{\rm CG}} $\\
+\hline
+27 & $\rightarrow {\rm cGMP}$ & $v_{\rm f} = f_1 \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C1}}\bigr)^{m_1}} + f_{\rm 1m} \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C1m}}\bigr)^{m_{\rm 1m}}} + ...$\\
+ & & $ + f_2 \cdot \frac{\alpha_{\rm max}}{1+\bigl( \frac{{\rm Ca}^{2+}_{\rm free}}{K_{\rm C2}}\bigr)^{m_2}}$\\
+\hline
+28 & ${\rm cGMP} \rightarrow $ & $v_{\rm f} = \left( \beta_{\rm dark} + \beta_{\rm sub} \cdot E \right) \cdot {\rm cGMP} $\\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+Parameters and variables that have changed with respect to the Invergo model are marked in red.
+
+\begin{table}[H]
+\centering
+\caption{Parameters and variables in the HSDM backend.}
+\label{tab_params_mouse}
+\begin{tabular}{l | l}
+Name & Value \\
+\hline
+\hline
+$k_1$ & $ 9.37059/\mathrm{s}\mu\mathrm{M}$ \\
+\hline
+$e_{\rm T}$ & $ 400\,\mu\mathrm{M}$ \\
+\hline
+$k_2$ & $ 46.412/\mathrm{s}$ \\
+\hline
+$\gamma_{\rm Ca}$ & $ 981.356/\mathrm{s}$ \\
+\hline
+${\rm Ca}^{2+}_0$ & $ 0.023\,\mu\mathrm{M}$ \\
+\hline
+$f_{\rm Ca}$ & $ 0.12$ \\
+\hline
+$J_{\rm dark}$ & $ 14.87\,\mathrm{pA}$ \\
+\hline
+$F$ & $ 96485.3/\mathrm{cm}$ \\
+\hline
+$V_{\rm cyto}$ & $ 0.03916\,\mathrm{pL}$ \\
+\hline
+${\rm cGMP}_{\rm dark}$ & $ 6.4944\,\mu\mathrm{M}$ \\
+\hline
+$n_{\rm CG}$ & $ 3.8$ \\
+\hline
+\textcolor{red}{$\alpha_{\rm max}$} & $60\,\mu\mathrm{M}/s$ \\
+\hline
+$\beta_{\rm dark} $ & $ 3.19/\mathrm{s}$ \\
+\hline
+${\rm Ca}^{2+}_{\rm dark}$ & $ 0.25\,\mu\mathrm{M}$ \\
+\hline
+$K_{\rm C1}$ & $ 0.171\,\mu\mathrm{M}$ \\
+\hline
+\textcolor{red}{$K_{\rm C1m}$} & $ 0.171\,\mu\mathrm{M}$ \\
+\hline
+$K_{\rm C2}$ & $ 0.059\,\mu\mathrm{M}$ \\
+\hline
+$m_1$ & $3$\\
+\hline
+\textcolor{red}{$m_{\rm 1m}$} & $3$\\
+\hline
+$m_2$ & $1.5$\\
+\hline
+\textcolor{red}{$f_1$} & $0.5$\\
+\hline
+\textcolor{red}{$f_{\rm 1m}$} & $0$\\
+\hline
+\textcolor{red}{$f_2$} & $0.5$\\
+\hline
+\textcolor{red}{$\beta_{\rm sub}$} & $0.01/\mathrm{s}$\\
+\hline
+$E$ & ${\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + {\rm G}_{\alpha{\rm GTP}}\_{\rm PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}} + 2\cdot {\rm G}_{\alpha{\rm GTP}}\_{\rm {}^{*} PDE}^{*}\_{\rm G}_{\alpha{\rm GTP}}$\\
+\hline
+$J$ & $\frac{2}{2 + f_{\rm Ca}} \cdot \left( \frac{{\rm cGMP}}{{\rm cGMP}_{\rm dark}} \right)^{n_{\rm CG}} \cdot J_{\rm dark} + \frac{f_{\rm Ca}}{f_{\rm Ca} + 2} \cdot \frac{{\rm Ca}^{2+}_{\rm free}-{\rm Ca}^{2+}_0}{{\rm Ca}^{2+}_{\rm dark}-{\rm Ca}^{2+}_0} \cdot J_{\rm dark}$ \\
+\hline
+$\Delta J$ & $J_{\rm dark} - J$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Nonzero initial conditions in the HSDM backend.}
+\label{tab_init_mouse}
+\begin{tabular}{l | l}
+Species & Concentration \\
+\hline
+\hline
+${\rm Ca}^{2+}_{\rm free}(0)$ & $0.25\,\mu\mathrm{M}$\\
+\hline
+${\rm Ca}^{2+}_{\rm buff}(0)$ & $19.2199\,\mu\mathrm{M}$\\
+\hline
+${\rm cGMP}(0)$ & $6.4944\,\mu\mathrm{M}$\\
 \hline
 \end{tabular}
 \end{table}
